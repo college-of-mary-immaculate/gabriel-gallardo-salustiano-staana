@@ -3,6 +3,7 @@ import PageNotFound from "./pages/pageNotFound.js";
 import Home from "./pages/home.js";
 import Login from "./pages/login.js";
 import SignUp from "./pages/signup.js";
+import Profile from "./pages/profile.js";
 
 import "./styles/common.css";
 
@@ -17,5 +18,6 @@ window.app = app;
 app.add("/", Home);
 app.add("/login", Login);
 app.add("/signup", SignUp);
+app.add("/profile", Profile);
 
 app.handleRouteChanges();
