@@ -7,10 +7,9 @@ export default function Main(root) {
             <!-- <img src="voting-logo.png" alt="voting-logo" class="logo"> -->
             <h2>VOTING SYSTEM LOGO</h2>
         </div> 
-        <div class="${styles['login-form-container']}">
+        <div class="${styles['signup-form-container']}">
             <div class="${styles['label-account']}">
                 <h1>Create Account</h1>
-                <!-- <h3>Please login using the form below</h3> -->
             </div>
 
             <div class="${styles['user-input']}">
