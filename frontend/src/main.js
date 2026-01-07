@@ -4,6 +4,7 @@ import Home from "./pages/home.js";
 import Login from "./pages/login.js";
 import SignUp from "./pages/signup.js";
 import Profile from "./pages/profile.js";
+import Landing from "./pages/landing.js";
 
 import "./styles/common.css";
 
@@ -19,5 +20,6 @@ app.add("/", Home);
 app.add("/login", Login);
 app.add("/signup", SignUp);
 app.add("/profile", Profile);
+app.add("/landing", Landing);
 
 app.handleRouteChanges();
