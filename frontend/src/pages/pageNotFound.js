@@ -1,15 +1,20 @@
-import Layout from "../layouts/default.js";
-import Header from "../components/pageNotFound/header.js";
-import Main from "../components/pageNotFound/main.js";
-import Footer from "../components/pageNotFound/footer.js";
+import { LayoutTemplate } from "../layouts/default.js";
+import { HeaderSSR } from "../components/pageNotFound/header.js";
+import { MainSSR } from "../components/pageNotFound/main.js";
+import { FooterSSR } from "../components/pageNotFound/footer.js";
 import Events from "../components/pageNotFound/event.js";
 
+const template = () => LayoutTemplate(
+  HeaderSSR(), 
+  MainSSR(), 
+  FooterSSR()
+);
+
+export function renderSSR() {
+  return template();
+}
+
 export default function PageNotFound() {
-  const { header, main, footer } = Layout(this.root);
-
-  Header(header);
-  Main(main);
-  Footer(footer);
-
-  // Events();
+  this.root.innerHTML = template();
+  Events();
 }

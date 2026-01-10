@@ -2,8 +2,8 @@ import styles from "./component.module.css";
 
 export function FooterSSR() {
   return `
-    <div class="${styles['footer-content']}">
-      <p>Home Footer Component</p>
+    <div class="${styles['footer-content'] || ''}">
+      <p>Profile Footer Component</p>
     </div>
   `;
 }
