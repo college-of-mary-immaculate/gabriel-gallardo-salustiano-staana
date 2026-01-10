@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+.signup-form-body {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+
 .logo-container {
     flex: 1;
-    position: absolute;
     align-items: center;
     justify-content: center;
     top: 150px;
@@ -28,7 +33,6 @@
 .signup-form-container {
     flex: 1;
     background-color: white;
-    position: absolute;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -175,7 +179,7 @@
         margin-bottom: 25px;
     }
 
-    .label-account h1 {
+    .label-account-h1 {
         font-size: 20px;
     }
 
@@ -185,10 +189,10 @@
         max-width: 100%;
     }
 
-    .last-name-input p,
-    .first-name-input p,
-    .email-input p,
-    .password-input p {
+    .last-name-input-p,
+    .first-name-input-p,
+    .email-input-p,
+    .password-input-p {
         left: 0;
         font-size: 15px;
     }
@@ -220,7 +224,7 @@
 
 /* Medium Mobile: 375px */
 @media (max-width: 375px) {
-    body {
+    .signup-form-body {
         padding: 15px;
     }
 
@@ -228,7 +232,7 @@
         margin-bottom: 20px;
     }
 
-    .logo-container h2 {
+    .logo-container-h2 {
         width: 160px;
         height: 160px;
         font-size: 18px;
@@ -244,7 +248,7 @@
         margin-bottom: 20px;
     }
 
-    .label-account h1 {
+    .label-account-h1 {
         font-size: 19px;
     }
 
@@ -255,10 +259,10 @@
         margin-bottom: 16px;
     }
 
-    .last-name-input p,
-    .first-name-input p,
-    .email-input p,
-    .password-input p {
+    .last-name-input-p,
+    .first-name-input-p,
+    .email-input-p,
+    .password-input-p {
         font-size: 14px;
         margin-bottom: 5px;
     }
@@ -284,7 +288,7 @@
 
 /* Small Mobile: 320px */
 @media (max-width: 320px) {
-    body {
+    .signup-form-body {
         padding: 12px;
     }
 
@@ -292,7 +296,7 @@
         margin-bottom: 18px;
     }
 
-    .logo-container h2 {
+    .logo-container-h2 {
         width: 140px;
         height: 140px;
         font-size: 16px;
@@ -308,7 +312,7 @@
         margin-bottom: 18px;
     }
 
-    .label-account h1 {
+    .label-account-h1 {
         font-size: 18px;
     }
 
@@ -319,10 +323,10 @@
         margin-bottom: 14px;
     }
 
-    .last-name-input p,
-    .first-name-input p,
-    .email-input p,
-    .password-input p {
+    .last-name-input-p,
+    .first-name-input-p,
+    .email-input-p,
+    .password-input-p {
         font-size: 13px;
         margin-bottom: 4px;
     }

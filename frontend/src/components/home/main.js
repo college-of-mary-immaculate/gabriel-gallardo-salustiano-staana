@@ -4,7 +4,6 @@ import styles from "./component.module.css";
 export function MainSSR() {
   return `
     <div class="${styles['main-content']}">
-      <h1>Home Main Component</h1>
       <section class="${styles['secondary-header']}">
           <h2 class="${styles['secondary-header-h2']}">Every Voice Matters in Philippine Governance</h2>
           <h3 class="${styles['secondary-header-h3']}">Join live polls on voting for government officials and see real-time results</h3>

@@ -1,7 +1,7 @@
 import styles from "./component.module.css";
 
-export default function Main(root) {
-  root.innerHTML = `
+export function MainSSR() {
+  return `
     <div class="${styles['signup-form-body']}">
         <div class="${styles['logo-container']}">
             <!-- <img src="voting-logo.png" alt="voting-logo" class="logo"> -->
@@ -37,5 +37,9 @@ export default function Main(root) {
         </div>  
     </div>
   `;
-   root.className = styles['main'];
+}
+
+export default function Main(root) {
+  root.innerHTML = MainSSR();
+  root.className = styles['main'];
 }

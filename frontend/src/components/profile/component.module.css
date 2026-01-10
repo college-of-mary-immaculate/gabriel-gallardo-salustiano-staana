@@ -1,5 +1,13 @@
+.profile-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 20px;
+}
+
 .profile-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: white;
@@ -13,7 +21,6 @@
 }
 
 .profile-img {
-    position: absolute;
     justify-content: center;
     display: flex;
     margin-bottom: 20px;
@@ -22,7 +29,6 @@
 
 .profile-img-img {
     position: relative;
-    bottom: 110px;
     width: 140px;
     height: 140px;
     border-radius: 50%;
@@ -30,7 +36,6 @@
 }
 
 .username {
-    position: absolute;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -43,7 +48,6 @@
 .profile-info-box {
     border-top: 2px solid #d0d0d0;
     border-bottom: 2px solid #d0d0d0;
-    position: absolute;
     width: 27%;
     top: 360px;
 }
@@ -72,7 +76,6 @@
 }
 
 .logout-btn {
-    position: relative;
     background-color: #FF4043;
     color: white;
     border: none;

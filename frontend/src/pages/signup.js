@@ -5,16 +5,16 @@ import { FooterSSR } from "../components/signup/footer.js";
 import Events from "../components/signup/event.js";
 
 const template = () => LayoutTemplate(
-  HeaderSSR(), 
+  "", 
   MainSSR(), 
-  FooterSSR()
+  ""
 );
 
 export function renderSSR() {
   return template();
 }
 
-export default function SignupPage() {
+export default function SignUpPage() {
   this.root.innerHTML = template();
   Events();
 }

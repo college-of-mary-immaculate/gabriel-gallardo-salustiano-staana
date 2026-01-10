@@ -5,9 +5,9 @@ import { FooterSSR } from "../components/home/footer.js";
 import Events from "../components/home/event.js";
 
 const template = () => LayoutTemplate(
-  HeaderSSR(), 
+  "", 
   MainSSR(), 
-  FooterSSR()
+  ""
 );
 
 export function renderSSR() {

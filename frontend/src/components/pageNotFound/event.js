@@ -1,3 +1,6 @@
 export default async function Events() {
-  // pass
+  window.addEventListener("load", async function () {
+    console.log('Page Not Found Event')
+  });
+
 }

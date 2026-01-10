@@ -3,10 +3,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px 60px;
-    position: absolute;
+    /* position: absolute; */
     bottom: 600px;
     right: 2px;
-    width: 1530px;
+    /* width: 1530px; */
     background: transparent;
     border-bottom: #bebebe solid 2px;
 }
@@ -15,6 +15,11 @@
     font-size: 24px;
     font-weight: 700;
     color: #1a1a1a;
+}
+
+.profile-top{
+    display: flex;
+    flex-direction: row;
 }
 
 .profile-top-img {
@@ -26,15 +31,15 @@
 }
 
 .main-content {
-    margin: 0 auto;
-    position: absolute;
-    top: 100px;
-    left: 4.5%;
-    width: 1340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .secondary-header {
-    position: relative;
+    /* position: relative; */
+    width: 50%;
     background: transparent;
     border-radius: 20px;
     padding: 50px 60px;
@@ -62,12 +67,10 @@
 }
 
 .vote-btn {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 10px;
     background: #2563eb;
-    position: relative;
-    right: 530px;
     color: white;
     border: none;
     border-radius: 8px;
@@ -95,25 +98,32 @@
 }
 
 .side-pic {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    /* right: 10%; */
+    /* top: 50%; */
+    /* transform: translateY(-50%); */
 }
 
 .side-pic-img {
+    align-self: center;
     width: 280px;
     height: auto;
 }
 
 .voting-tally {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
     background: white;
     border-radius: 20px;
     padding: 40px 60px;
-    position: relative;
-    width: 1260px;
-    bottom: 20px;
-    left: 60px;
+    /* position: relative; */
+    /* max-width: 1260px; */
+    /* bottom: 20px; */
+    /* left: 60px; */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -173,16 +183,17 @@
     font-size: 16px;
     font-weight: 700;
     color: #1a1a1a;
-    min-width: 120px;
+    /* min-width: 120px; */
 }
 
 .progress-container {
     flex: 1;
     height: 30px;
+    width: max-content;
     background: #e5e5e5;
     border-radius: 20px;
     overflow: hidden;
-    position: relative;
+    /* position: relative; */
 }
 
 .progress-bar {
@@ -201,6 +212,6 @@
     font-size: 18px;
     font-weight: 700;
     color: #1a1a1a;
-    min-width: 80px;
+    /* min-width: 80px; */
     text-align: right;
 }
