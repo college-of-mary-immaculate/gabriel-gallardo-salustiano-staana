@@ -27,6 +27,7 @@ import PageNotFound from "./pages/pageNotFound.js";
 import Home from "./pages/home.js";
 import Login from "./pages/login.js";
 import SignUp from "./pages/signup.js";
+import Vote from "./pages/vote.js";
 import Header from "./components/header/header.js";
 
 import "./styles/common.css";
@@ -47,5 +48,6 @@ window.appHeader = header;
 app.add("/", Home);
 app.add("/login", Login);
 app.add("/signup", SignUp);
+app.add("/vote", Vote);
 
 app.handleRouteChanges();
