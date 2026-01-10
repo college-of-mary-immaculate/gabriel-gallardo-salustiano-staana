@@ -1,15 +1,20 @@
-import Layout from "../layouts/default.js";
-import Header from "../components/home/header.js";
-import Main from "../components/home/main.js";
-import Footer from "../components/home/footer.js";
+import { LayoutTemplate } from "../layouts/default.js";
+import { HeaderSSR } from "../components/home/header.js";
+import { MainSSR } from "../components/home/main.js";
+import { FooterSSR } from "../components/home/footer.js";
 import Events from "../components/home/event.js";
 
-export default function Home() {
-  const { header, main, footer } = Layout(this.root);
+const template = () => LayoutTemplate(
+  HeaderSSR(), 
+  MainSSR(), 
+  FooterSSR()
+);
 
-  Header(header);
-  Main(main);
-  Footer(footer);
+export function renderSSR() {
+  return template();
+}
 
+export default function HomePage() {
+  this.root.innerHTML = template();
   Events();
 }
