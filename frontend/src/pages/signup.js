@@ -1,8 +1,20 @@
-import Layout from "../layouts/default.js";
-import Main from "../components/create account/main.js";
+import { LayoutTemplate } from "../layouts/default.js";
+import { HeaderSSR } from "../components/signup/header.js";
+import { MainSSR } from "../components/signup/main.js";
+import { FooterSSR } from "../components/signup/footer.js";
+import Events from "../components/signup/event.js";
 
-export default function SignUp() {
-  const {main} = Layout(this.root);
+const template = () => LayoutTemplate(
+  "", 
+  MainSSR(), 
+  ""
+);
 
-  Main(main);
+export function renderSSR() {
+  return template();
+}
+
+export default function SignUpPage() {
+  this.root.innerHTML = template();
+  Events();
 }

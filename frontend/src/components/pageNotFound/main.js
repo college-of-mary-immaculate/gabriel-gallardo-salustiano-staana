@@ -1,12 +1,14 @@
 import styles from "./component.module.css";
 
-export default function Main(root) {
-  root.innerHTML = `
-    <!-- Lagay mo here lahat ng elements mo sa main -->
+export function MainSSR() {
+  return `
     <div class="${styles['main-content']}">
-        <h1>Page Not Found Main Component</h1>
+      <h1>Page Not Found Main Component</h1>
     </div>
   `;
+}
 
-   root.className = styles['main'];
+export default function Main(root) {
+  root.innerHTML = MainSSR();
+  root.className = styles['main'];
 }

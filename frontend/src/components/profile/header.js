@@ -3,7 +3,7 @@ import styles from "./component.module.css";
 export function HeaderSSR() {
   return `
     <div class="${styles['header-content']}">
-      <p>Page Not Found Header Component</p>
+      <p>Profile Header Component</p>
     </div>
   `;
 }

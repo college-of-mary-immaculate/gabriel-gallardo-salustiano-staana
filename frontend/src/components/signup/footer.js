@@ -3,7 +3,7 @@ import styles from "./component.module.css";
 export function FooterSSR() {
   return `
     <div class="${styles['footer-content']}">
-      <p>Page Not Found Footer Component</p>
+      <p>Signup Form Footer Component</p>
     </div>
   `;
 }

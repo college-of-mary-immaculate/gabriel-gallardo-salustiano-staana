@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-.login-form-body {
+.signup-form-body {
     display: flex;
     flex-direction: row;
     padding: 20px;
@@ -15,8 +15,8 @@
 }
 
 .logo-container-h2 {
-    background-color: #00172B;
-    color: #D4D4FF;
+    background-color: #0a2540;
+    color: white;
     width: 400px;
     height: 400px;
     border-radius: 50%;
@@ -30,57 +30,55 @@
     padding: 50px;
 }
 
-.login-form-container {
+.signup-form-container {
     flex: 1;
     background-color: white;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 25px;
     left: 880px;
-    top: 85px;
+    top: 70px;
     width: 530px;
-    height: 540px;
+    height: 560px;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
     border-radius: 20px;
 }
 
-.label-voting {
+.label-account {
     position: relative;
-    top: 30px;
-    text-align: center;
+    top: 25px;
+    left: 26px;
+    text-align: left;
     margin-bottom: 50px;
 }
 
-.label-voting-h1 {
+.label-account-h1 {
     font-size: 22px;
     font-weight: 600;
     color: #000;
     margin-bottom: 20px;
 }
 
-.label-voting-h3 {
-    position: relative;
-    font-size: 16px;
-    font-weight: 400;
-    margin-top: 10px;
-    color: #888;
-}
-
 .user-input {
     position: relative;
-    top: 30px;
-    left: 10px;
+    top: 2px;
+    left: 15px;
     width: 100%;
-    align-items: left;
     max-width: 460px;
     margin-bottom: 25px;
 }
 
-.id-input,
+.last-name-input,
+.first-name-input,
+.email-input,
 .password-input {
     margin-bottom: 20px;
 }
 
-.id-input-p,
+.last-name-input-p,
+.first-name-input-p,
+.email-input-p,
 .password-input-p {
     position: relative;
     font-size: 16px;
@@ -91,7 +89,9 @@
     text-align: left;
 }
 
-.id-field,
+.last-name-field,
+.first-name-field,
+.email-field,
 .password-field {
     width: 90%;
     position: relative;
@@ -104,46 +104,47 @@
     background-color: white;
 }
 
-.login-btn {
+.create-acc-btn {
     width: 416px;
-    height: 47px;
+    height: 49px;
     position: relative;
-    top: 45px;
-    background-color: #2563EB;
+    top: 10px;
+    left: 5px;
+    background-color: #4169E1;
     color: white;
     font-size: 16px;
     font-weight: 600;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-   
 }
 
-.login-btn:hover {
+.create-acc-btn:hover {
     background-color: #3557c9;
 }
 
-.login-form-container > h3 {
+.signup-form-container > h3 {
     font-size: 15px;
     font-weight: 400;
     position: relative;
-    top: 80px;
+    left: 6px;
+    top: 28px;
     color: #888;
 }
 
-.login-form-container > h3 a {
+.signup-form-container > h3 a {
     color: #4169E1;
     text-decoration: none;
     font-weight: 500;
 }
 
-.login-form-container > h3 a:hover {
+.signup-form-container > h3 a:hover {
     text-decoration: underline;
 }
 
 /* Large Mobile: 425px */
 @media (max-width: 426px) {
-    .login-form-body {
+    .signup-form-body {
         flex-direction: column;
         padding: 20px;
     }
@@ -156,14 +157,14 @@
         margin-bottom: 25px;
     }
 
-    .logo-container-h2 {
+    .logo-container h2 {
         width: 180px;
         height: 180px;
         font-size: 20px;
         padding: 30px;
     }
 
-    .login-form-container {
+    .signup-form-container {
         position: static;
         width: 100%;
         max-width: 425px;
@@ -172,13 +173,13 @@
         padding: 30px 25px;
     }
 
-    .label-voting {
+    .label-account {
         left: 0;
         top: 0;
         margin-bottom: 25px;
     }
 
-    .label-voting-h3 {
+    .label-account-h1 {
         font-size: 20px;
     }
 
@@ -188,19 +189,23 @@
         max-width: 100%;
     }
 
-    .id-input-p,
+    .last-name-input-p,
+    .first-name-input-p,
+    .email-input-p,
     .password-input-p {
         left: 0;
         font-size: 15px;
     }
 
-    .id-field,
+    .last-name-field,
+    .first-name-field,
+    .email-field,
     .password-field {
         width: 100%;
         padding: 11px 14px;
     }
 
-    .login-btn {
+    .create-acc-btn {
         width: 100%;
         left: 0;
         top: 0;
@@ -208,7 +213,7 @@
         height: 47px;
     }
 
-    .login-form-container > h3 {
+    .signup-form-container > h3 {
         left: 0;
         top: 0;
         margin-top: 20px;
@@ -219,7 +224,7 @@
 
 /* Medium Mobile: 375px */
 @media (max-width: 375px) {
-    .login-form-body {
+    .signup-form-body {
         padding: 15px;
     }
 
@@ -239,37 +244,43 @@
         border-radius: 15px;
     }
 
-    .label-voting {
+    .label-account {
         margin-bottom: 20px;
     }
 
-    .label-voting-h1 {
+    .label-account-h1 {
         font-size: 19px;
     }
 
-    .id-input,
+    .last-name-input,
+    .first-name-input,
+    .email-input,
     .password-input {
         margin-bottom: 16px;
     }
 
-    .id-input-p,
+    .last-name-input-p,
+    .first-name-input-p,
+    .email-input-p,
     .password-input-p {
         font-size: 14px;
         margin-bottom: 5px;
     }
 
-    .id-field,
+    .last-name-field,
+    .first-name-field,
+    .email-field,
     .password-field {
         padding: 10px 12px;
         font-size: 14px;
     }
 
-    .login-btn {
+    .create-acc-btn {
         height: 45px;
         font-size: 15px;
     }
 
-    .login-form-container > h3 {
+    .signup-form-container > h3 {
         font-size: 13px;
         margin-top: 18px;
     }
@@ -277,7 +288,7 @@
 
 /* Small Mobile: 320px */
 @media (max-width: 320px) {
-    .login-form-body {
+    .signup-form-body {
         padding: 12px;
     }
 
@@ -292,48 +303,48 @@
         padding: 20px;
     }
 
-    .login-form-container {
+    .signup-form-container {
         padding: 20px 15px;
         border-radius: 12px;
     }
 
-    .label-voting {
-        margin-bottom: 20px;
+    .label-account {
+        margin-bottom: 18px;
     }
 
-    .label-voting-h3 {
-        font-size: 14px;
-        position: relative;
-        margin-top: 2px;
+    .label-account-h1 {
+        font-size: 18px;
     }
 
-    .label-voting-h2 {
-        font-size: 20px;
-    }
-
-    .id-input,
+    .last-name-input,
+    .first-name-input,
+    .email-input,
     .password-input {
         margin-bottom: 14px;
     }
 
-    .id-input-p,
+    .last-name-input-p,
+    .first-name-input-p,
+    .email-input-p,
     .password-input-p {
         font-size: 13px;
         margin-bottom: 4px;
     }
 
-    .id-field,
+    .last-name-field,
+    .first-name-field,
+    .email-field,
     .password-field {
         padding: 9px 11px;
         font-size: 13px;
     }
 
-    .login-btn {
+    .create-acc-btn {
         height: 43px;
         font-size: 14px;
     }
 
-    .login-form-container > h3 {
+    .signup-form-container > h3 {
         font-size: 12px;
         margin-top: 16px;
     }
