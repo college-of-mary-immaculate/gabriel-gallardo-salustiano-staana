@@ -5,16 +5,16 @@ import { FooterSSR } from "../components/profile/footer.js";
 import Events from "../components/profile/event.js";
 
 const template = () => LayoutTemplate(
-  HeaderSSR(),
-  MainSSR(),
-  FooterSSR()
+  "", 
+  MainSSR(), 
+  ""
 );
 
 export function renderSSR() {
   return template();
 }
 
-export default function Profile() {
+export default function ProfilePage() {
   this.root.innerHTML = template();
   Events();
 }

@@ -3,7 +3,7 @@ import styles from "./component.module.css";
 export function HeaderSSR() {
   return `
     <div class="${styles['header-content']}">
-      <p>Profile Header Component</p>
+      <p>Signup Form Header Component</p>
     </div>
   `;
 }
