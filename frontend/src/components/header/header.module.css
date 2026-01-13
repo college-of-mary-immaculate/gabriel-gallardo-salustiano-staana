@@ -118,11 +118,6 @@
   background-color: #1d4ed8;
 }
 
-/* Add padding to body to account for fixed header */
-body {
-  padding-top: 64px;
-}
-
 /* Hide padding on login page */
 body.login-page {
   padding-top: 0;
