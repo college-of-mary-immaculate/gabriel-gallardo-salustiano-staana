@@ -5,6 +5,8 @@ import PageNotFoundPage from "./pages/pageNotFound.js";
 import LoginPage from "./pages/login.js";
 import SignUpPage from "./pages/signup.js";
 import ProfilePage from "./pages/profile.js";
+import VotePage from "./pages/vote.js";
+import ReceiptPage from './pages/receipt.js';
 
 const app = new SPA({
   root: document.getElementById("app"),
@@ -18,6 +20,8 @@ app.add("/", HomePage);
 app.add("/login", LoginPage);
 app.add("/signup", SignUpPage);
 app.add("/profile", ProfilePage);
+app.add("/vote", VotePage);
+app.add("/receipt", ReceiptPage);
 
 
 

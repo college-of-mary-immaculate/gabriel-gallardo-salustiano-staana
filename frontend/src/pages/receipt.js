@@ -1,12 +1,10 @@
 import { LayoutTemplate } from "../layouts/default.js";
 import { HeaderSSR } from "../components/header/header.js";
-import { MainSSR } from "../components/home/main.js";
-import Events from "../components/home/event.js";
+import { MainSSR as ReceiptMain } from "../components/receipt/main.js";
 
 const template = () => LayoutTemplate(
-  "",
   HeaderSSR(),
-  MainSSR(), 
+  ReceiptMain(),
   ""
 );
 
@@ -14,7 +12,6 @@ export function renderSSR() {
   return template();
 }
 
-export default function HomePage() {
+export default function ReceiptPage() {
   this.root.innerHTML = template();
-  Events();
 }

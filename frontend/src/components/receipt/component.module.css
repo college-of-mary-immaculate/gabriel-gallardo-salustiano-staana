@@ -1,0 +1,165 @@
+/* Topbar */
+.topbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: max(0px, calc(50% - 710px));
+  right: max(0px, calc(50% - 960px));
+  background-color: #E8EAED;
+  padding: 12px 60px;
+  display: flex;
+  border-top: 1px solid rgba(69, 69, 69, 0.2);
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 99;
+
+  background: linear-gradient(
+    90deg,
+    #003b6f 0%,
+    #005fa3 100%
+  );
+
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.topbar_content {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.topbar_title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.topbar_subtitle {
+  margin-top: 4px;
+  margin-bottom: 0px;
+  font-size: 0.80rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+
+/* MAIN */
+
+/* Receipt card */
+.receipt-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 420px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin: auto;
+  margin-top: 100px;
+}
+
+/* Header */
+.label-container {
+  background-color: #4c86ff;
+  padding: 16px;
+  text-align: center;
+}
+
+.label-h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Content area */
+.your-vote-container {
+  padding: 20px 24px 28px;
+  color: #333;
+  font-size: 13px;
+}
+
+/* Status badge */
+.vote-recorded {
+  display: inline-block;
+  background-color: #e6f7ec;
+  color: #2e8b57;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+  margin: 0 auto 10px;
+}
+
+/* Center helpers */
+.center {
+  text-align: center;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 16px 0;
+}
+
+/* Info rows (Voter, Location, Date, Time) */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.info-label {
+  color: #6b7280;
+}
+
+.info-value {
+  font-weight: 500;
+  color: #111827;
+}
+
+/* Section title */
+.section-title {
+  margin-top: 16px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Vote rows with dotted leader */
+.vote-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.vote-label {
+  white-space: nowrap;
+  color: #374151;
+}
+
+.vote-dots {
+  flex: 1;
+  border-bottom: 1px dotted #cfd4dc;
+  margin: 0 8px;
+  height: 1px;
+}
+
+.vote-value {
+  white-space: nowrap;
+  font-weight: 500;
+  color: #111827;
+}
+
+/* Spacing helpers */
+.mt-sm {
+  margin-top: 8px;
+}
+
+.mt-md {
+  margin-top: 16px;
+}
