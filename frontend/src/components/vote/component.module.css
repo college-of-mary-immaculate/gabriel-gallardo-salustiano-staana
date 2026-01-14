@@ -262,3 +262,7 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(81, 207, 102, 0.3);
 }
+
+.votetopbar {
+  display: flex;
+}

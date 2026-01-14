@@ -19,5 +19,5 @@ export default function Header(root) {
     </header>
   `;
   
-  root.className = styles['header'];
+  // root.className = styles['header'];
 }

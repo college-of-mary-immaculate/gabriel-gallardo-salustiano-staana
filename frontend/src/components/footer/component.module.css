@@ -1,0 +1,28 @@
+.footer-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-content-p {
+  color: black;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-nav {
+    display: none;
+  }
+  
+  .header-container {
+    padding: 0 16px;
+  }
+  
+  .nav-list {
+    gap: 16px;
+  }
+}

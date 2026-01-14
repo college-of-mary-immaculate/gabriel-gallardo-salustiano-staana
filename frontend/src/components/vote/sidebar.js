@@ -12,5 +12,5 @@ export default function Sidebar(root){
     </div>
   `;
 
-  root.className = styles['sidebar'];
+  // root.className = styles['sidebar'];
 }

@@ -26,5 +26,5 @@ export default function Main(root) {
     </div>
   `;
 
-  root.className = styles.main;
+  // root.className = styles.main;
 }
