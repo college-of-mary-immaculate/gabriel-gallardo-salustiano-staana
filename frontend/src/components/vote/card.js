@@ -1,12 +1,12 @@
-import styles from "./component.module.css";
+//components/vote/card.js
 
-export function CardSSR({ name, bgColor = "#1a27aeff" }) {
+import styles from "./component.module.css";
+ 
+export function CardSSR({ name, image}) {
   return `
     <div class="${styles['card']}">
-        <div class="${styles['card_shine']}"></div>
-        <div class="${styles['card_glow']}"></div>
         <div class="${styles['card_content']}">
-            <div style="background: linear-gradient(45deg, ${bgColor}, ${bgColor}dd)" class="${styles['card_image']}"></div>
+            <div class="${styles['card_image']}" style="background-image: url('${image}')"></div>
             <div class="${styles['card_text']}">
                 <p class="${styles['card_title']}">${name}</p>
             </div>
@@ -15,6 +15,6 @@ export function CardSSR({ name, bgColor = "#1a27aeff" }) {
   `;
 }
 
-export default function Card(container, { name, bgColor }) {
-  container.innerHTML = CardSSR({ name, bgColor });
+export default function Card(container, {name}) {
+  container.innerHTML = CardSSR({ name });
 }

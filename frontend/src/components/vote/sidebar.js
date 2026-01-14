@@ -1,7 +1,7 @@
 // src/components/voting/sidebar.js
 import styles from "./component.module.css";
 
-export function SidebarSSR(){
+export function Sidebar(){
   return `
     <div class="${styles['sidenav']}">
       <a class="${styles['sidebar-item']}" href="#president">President</a>
@@ -14,6 +14,6 @@ export function SidebarSSR(){
 }
 
 export default function Main(root) {
-  root.innerHTML = SidebarSSR();
+  root.innerHTML = Sidebar();
   root.className = styles['main'];
 }

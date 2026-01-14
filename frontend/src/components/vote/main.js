@@ -1,23 +1,22 @@
+//components/vote/main.js
+
 import styles from "./component.module.css";
 import { CardSSR } from "./card.js";
-
-// Sample data - you can replace this with actual data
-const candidates = [
-  { name: "John Doe", bgColor: "#1a27aeff" },
-  { name: "Jane Smith", bgColor: "#2a37beff" },
-  { name: "Bob Johnson", bgColor: "#3a47ceff" },
-  { name: "Alice Williams", bgColor: "#4a57deff" },
-  { name: "Charlie Brown", bgColor: "#5a67eeff" },
-  { name: "Diana Prince", bgColor: "#6a77feff" },
-  { name: "Eve Davis", bgColor: "#7a87ffff" }
-];
+import { candidates } from "./event.js";
+import { TopbarSSR } from "./topbar.js";
 
 export function MainSSR() {
   const cardsHtml = candidates
     .map(candidate => CardSSR(candidate))
     .join('');
 
-  return `
+  return ` 
+    <div  class="${styles['votetopbar']}">
+      ${TopbarSSR({
+          title: "Review Your Votes",
+          subtitle: "Please confirm before submitting"
+        })}
+    </div>
     <div class="${styles['main-content']}">
         ${cardsHtml}
     </div>
