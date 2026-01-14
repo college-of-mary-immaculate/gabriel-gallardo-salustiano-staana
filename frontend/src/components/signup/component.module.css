@@ -7,16 +7,16 @@
 }
 
 .logo-container {
-    flex: 1;
+    flex: 2;
     align-items: center;
     justify-content: center;
-    top: 150px;
-    left: 220px;
+    margin-top: 20px;
+    margin-left: 100px;
 }
 
 .logo-container-h2 {
-    background-color: #0a2540;
-    color: white;
+    background-color: #00172B;
+    color: #D4D4FF;
     width: 400px;
     height: 400px;
     border-radius: 50%;
@@ -31,41 +31,49 @@
 }
 
 .signup-form-container {
-    flex: 1;
+    flex: 1.5;
     background-color: white;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding: 25px;
-    left: 880px;
-    top: 70px;
+    margin-right: 110px;
+    top: 85px;
     width: 530px;
-    height: 560px;
+    height: 540px;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
     border-radius: 20px;
 }
 
 .label-account {
     position: relative;
-    top: 25px;
-    left: 26px;
+    top: 10px;
+    left: 15px;
     text-align: left;
     margin-bottom: 50px;
 }
 
 .label-account-h1 {
+    position: relative;
     font-size: 22px;
     font-weight: 600;
     color: #000;
-    margin-bottom: 20px;
+    bottom: 10px;
+}
+
+.label-account-h3 {
+    position: relative;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 10px;
+    color: #888;
 }
 
 .user-input {
     position: relative;
-    top: 2px;
-    left: 15px;
+    bottom: 30px;
     width: 100%;
-    max-width: 460px;
+    margin-left: 20px;
+    align-items: left;
+    max-width: 457px;
     margin-bottom: 25px;
 }
 
@@ -73,7 +81,7 @@
 .first-name-input,
 .email-input,
 .password-input {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .last-name-input-p,
@@ -82,7 +90,7 @@
 .password-input-p {
     position: relative;
     font-size: 16px;
-    left: 23px;
+    left: 5px;
     font-weight: 500;
     color: #555;
     margin-bottom: 6px;
@@ -105,12 +113,12 @@
 }
 
 .create-acc-btn {
-    width: 416px;
-    height: 49px;
+    width: 440px;
+    height: 47px;
     position: relative;
-    top: 10px;
-    left: 5px;
-    background-color: #4169E1;
+    right: 2px;
+    bottom: 25px;
+    background-color: #2563EB;
     color: white;
     font-size: 16px;
     font-weight: 600;
@@ -127,8 +135,7 @@
     font-size: 15px;
     font-weight: 400;
     position: relative;
-    left: 6px;
-    top: 28px;
+    bottom: 25px;
     color: #888;
 }
 
@@ -142,22 +149,26 @@
     text-decoration: underline;
 }
 
-/* Large Mobile: 425px */
+/* Large Mobile */
 @media (max-width: 426px) {
     .signup-form-body {
         flex-direction: column;
-        padding: 20px;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+        min-height: 100vh;
     }
 
     .logo-container {
-        position: static;
         width: 100%;
         display: flex;
         justify-content: center;
-        margin-bottom: 25px;
+        align-items: center;
+        margin: 0;
+        margin-bottom: 30px;
     }
 
-    .logo-container h2 {
+    .logo-container-h2 {
         width: 180px;
         height: 180px;
         font-size: 20px;
@@ -168,25 +179,37 @@
         position: static;
         width: 100%;
         max-width: 425px;
-        margin: 0 auto;
         height: auto;
-        padding: 30px 25px;
+        margin: 0;
+        padding: 35px 30px;
+        top: 0;
     }
 
     .label-account {
-        left: 0;
         top: 0;
         margin-bottom: 25px;
     }
 
     .label-account-h1 {
-        font-size: 20px;
+        bottom: 0;
+        font-size: 22px;
+    }
+
+    .label-account-h3 {
+        font-size: 14px;
     }
 
     .user-input {
-        left: 0;
         top: 0;
-        max-width: 100%;
+        max-width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .last-name-input,
+    .first-name-input,
+    .email-input,
+    .password-input {
+        margin-bottom: 18px;
     }
 
     .last-name-input-p,
@@ -206,15 +229,14 @@
     }
 
     .create-acc-btn {
-        width: 100%;
-        left: 0;
+        width: 89%;
+        margin-left: 10px;
         top: 0;
-        margin-top: 15px;
+        margin-top: 10px;
         height: 47px;
     }
 
     .signup-form-container > h3 {
-        left: 0;
         top: 0;
         margin-top: 20px;
         text-align: center;
@@ -222,14 +244,14 @@
     }
 }
 
-/* Medium Mobile: 375px */
-@media (max-width: 375px) {
+/* Medium Mobile*/
+@media (min-width: 375px) and (max-width: 425px) {
     .signup-form-body {
-        padding: 15px;
+        padding: 30px 15px;
     }
 
     .logo-container {
-        margin-bottom: 20px;
+        margin-bottom: 25px;
     }
 
     .logo-container-h2 {
@@ -240,7 +262,7 @@
     }
 
     .signup-form-container {
-        padding: 25px 20px;
+        padding: 30px 25px;
         border-radius: 15px;
     }
 
@@ -249,7 +271,16 @@
     }
 
     .label-account-h1 {
-        font-size: 19px;
+        font-size: 20px;
+    }
+
+    .label-account-h3 {
+        font-size: 13px;
+    }
+
+    .user-input {
+        position: relative;
+        right: 8px;
     }
 
     .last-name-input,
@@ -276,6 +307,8 @@
     }
 
     .create-acc-btn {
+        margin-left: 3px;
+        width: 89%;
         height: 45px;
         font-size: 15px;
     }
@@ -286,14 +319,16 @@
     }
 }
 
-/* Small Mobile: 320px */
+/* Small Mobile */
 @media (max-width: 320px) {
     .signup-form-body {
-        padding: 12px;
+        padding: 25px 15px;
     }
 
     .logo-container {
-        margin-bottom: 18px;
+        position: relative;
+        bottom: 12px;
+        margin-bottom: 20px;
     }
 
     .logo-container-h2 {
@@ -304,7 +339,10 @@
     }
 
     .signup-form-container {
-        padding: 20px 15px;
+        position: static;
+        width: 100%;
+        max-width: 212px;
+        padding: 25px 20px;
         border-radius: 12px;
     }
 
@@ -312,8 +350,21 @@
         margin-bottom: 18px;
     }
 
-    .label-account-h1 {
+    .label-account-h2 {
+        position: relative;
+        bottom: 10px;
         font-size: 18px;
+    }
+
+    .label-account-h3 {
+        position: relative;
+        bottom: 10px;
+        font-size: 12px;
+    }
+
+    .user-input {
+        position: relative;
+        right: 8px;
     }
 
     .last-name-input,
@@ -335,11 +386,13 @@
     .first-name-field,
     .email-field,
     .password-field {
-        padding: 9px 11px;
+        padding: 9px 10px;
         font-size: 13px;
     }
 
     .create-acc-btn {
+        margin-left: 12px;
+        width: 90%;
         height: 43px;
         font-size: 14px;
     }
