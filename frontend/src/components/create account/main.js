@@ -1,6 +1,6 @@
 import styles from "./component.module.css";
 
-export default function Main(root) {
+export default function Confirmation(root) {
   root.innerHTML = `
     <body>
         <div class="${styles['logo-container']}">

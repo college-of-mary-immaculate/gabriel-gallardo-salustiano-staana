@@ -29,6 +29,7 @@ import Login from "./pages/login.js";
 import SignUp from "./pages/signup.js";
 import Vote from "./pages/vote.js";
 import Header from "./components/header/header.js";
+// import Confirmation from "./componets/confirmation/confirmation.js";
 
 import "./styles/common.css";
 import "./components/header/header.css";
@@ -37,6 +38,8 @@ const app = new SPA({
   root: document.getElementById("app"),
   defaultRoute: PageNotFound
 });
+
+// app.add("/confirmation", Confirmation)
 
 window.app = app;
 
