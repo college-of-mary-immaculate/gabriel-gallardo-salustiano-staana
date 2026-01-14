@@ -1,17 +1,12 @@
-import { LayoutTemplate } from "../layouts/default.js";
-import { HeaderSSR } from "../components/header/header.js";
-import { MainSSR as ReceiptMain } from "../components/receipt/main.js";
+import Layout  from "../layouts/default.js";
+import Main from "../components/receipt/main.js";
+import Header from "../components/header/header.js";
 
-const template = () => LayoutTemplate(
-  HeaderSSR(),
-  ReceiptMain(),
-  ""
-);
-
-export function renderSSR() {
-  return template();
-}
 
 export default function ReceiptPage() {
-  this.root.innerHTML = template();
+  const { main, header } = Layout(this.root);
+  Header(header);
+  Main(main);
+
+  Events();
 }

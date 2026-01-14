@@ -2,7 +2,7 @@
 
 import styles from "../vote/component.module.css";
 
-export function TopbarSSR({ title, subtitle }) {
+export default function Topbar({ title, subtitle }) {
   return `
     <div class="${styles.topbar}">
       <div class="${styles.topbar_content}">
@@ -11,8 +11,4 @@ export function TopbarSSR({ title, subtitle }) {
       </div>
     </div>
   `;
-}
-
-export default function Topbar(container, props) {
-  container.innerHTML = TopbarSSR(props);
 }

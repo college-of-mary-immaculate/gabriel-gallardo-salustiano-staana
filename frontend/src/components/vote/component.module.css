@@ -13,6 +13,7 @@
   text-align: left;
   border-right: 1px solid #ccc;
   z-index: 100;
+  margin-top: 60px;
 }
 
 .sidebar-item {
@@ -82,15 +83,23 @@
 
 /* MAIN */
 .main-content {
-  margin-top: 80px;
+  margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 60px;
+  gap: 10px;
   width: 100%;
-  /* margin-left: 250px; */
-  padding: 60px;
+  padding: 50px;
   justify-content: center;
   box-sizing: border-box;
+  height: fit-content;
+  overflow-y: auto;      /* allow scrolling */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE / Edge */
+}
+
+/* Chrome, Safari, Opera */
+.main-content::-webkit-scrollbar {
+  display: none;
 }
 
 /* From Uiverse.io by SachinKumar666 */ 

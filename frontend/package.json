@@ -4,15 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node server",
-    "start": "cross-env ENV=production node server",
-    "build": "npm run build:client && npm run build:server",
-    "build:client": "vite build --outDir dist/client",
-    "build:server": "vite build --outDir dist/server --ssr src/entry-server.js ",
-    "preview": "cross-env ENV=production node server"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "cross-env": "^10.1.0",
     "vite": "^7.2.4"
   },
   "dependencies": {

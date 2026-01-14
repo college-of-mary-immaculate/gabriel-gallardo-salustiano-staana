@@ -1,7 +1,7 @@
 import styles from "./component.module.css";
 
-export function HeaderSSR() {
-  return `
+export default function Header(root) {
+  root.innerHTML = `
     <div class="${styles['header-content']}">
       <h1 class="${styles['header-title']}">VOTE PH</h1>
       <div class="${styles['profile-top']}">
@@ -9,9 +9,6 @@ export function HeaderSSR() {
       </div>
     </div>
   `;
-}
-
-export default function Header(root) {
-  root.innerHTML = HeaderSSR();
+  
   root.className = styles['header'];
 }

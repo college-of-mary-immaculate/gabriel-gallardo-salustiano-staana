@@ -1,8 +1,9 @@
 import styles from "./component.module.css";
+// import { ROUTES } from "../../Routes";
 
-export function MainSSR() {
-  return `
-    <div class="${styles['profile-body']}">
+export default function Main(root) {
+  root.innerHTML = `
+<div class="${styles['profile-body']}">
         <div class="${styles['profile-container']}">
             <div class="${styles['profile-img']}">
                 <img class="${styles['profile-img-img']}" src="https://res.cloudinary.com/dayv9oa8q/image/upload/v1767623076/user_3_yey8ap.png" alt="profile">
@@ -27,9 +28,6 @@ export function MainSSR() {
         </div>
     </div>
   `;
-}
 
-export default function Main(root) {
-  root.innerHTML = MainSSR();
-  root.className = styles['main'];
+   root.className = styles['main'];
 }

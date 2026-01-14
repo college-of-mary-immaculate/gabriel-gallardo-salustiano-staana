@@ -1,14 +1,11 @@
 import styles from "./component.module.css";
 
-export function HeaderSSR() {
-  return `
+export default function Header(root) {
+  root.innerHTML = `
     <div class="${styles['header-content']}">
       <p>Page Not Found Header Component</p>
     </div>
   `;
-}
-
-export default function Header(root) {
-  root.innerHTML = HeaderSSR();
+  
   root.className = styles['header'];
 }

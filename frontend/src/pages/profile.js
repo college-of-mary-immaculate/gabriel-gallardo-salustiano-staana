@@ -1,20 +1,16 @@
-import { LayoutTemplate } from "../layouts/default.js";
-import { HeaderSSR } from "../components/profile/header.js";
-import { MainSSR } from "../components/profile/main.js";
-import { FooterSSR } from "../components/profile/footer.js";
+import Layout  from "../layouts/default.js";
+import Header from "../components/profile/header.js";
+import Main from "../components/profile/main.js";
+import Footer from "../components/profile/footer.js";
 import Events from "../components/profile/event.js";
 
-const template = () => LayoutTemplate(
-  "", 
-  MainSSR(), 
-  ""
-);
-
-export function renderSSR() {
-  return template();
-}
 
 export default function ProfilePage() {
-  this.root.innerHTML = template();
+  const { header, main, footer } = Layout(this.root);
+
+  Header(header);
+  Main(main);
+  Footer(footer);
+
   Events();
 }

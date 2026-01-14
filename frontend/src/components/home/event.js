@@ -3,6 +3,6 @@ export default async function Events() {
     console.log('Home Page Event')
   });
   
-  const socket = io();
-  console.log(socket);
+  // const socket = io();
+  // console.log(socket);
 }

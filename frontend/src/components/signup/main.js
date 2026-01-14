@@ -1,8 +1,8 @@
 import styles from "./component.module.css";
 
-export function MainSSR() {
-  return `
-    <div class="${styles['signup-form-body']}">
+export default function Main(root) {
+  root.innerHTML = `
+       <div class="${styles['signup-form-body']}">
         <div class="${styles['logo-container']}">
             <!-- <img src="voting-logo.png" alt="voting-logo" class="logo"> -->
             <h2 class="${styles['logo-container-h2']}">VOTING SYSTEM LOGO</h2>
@@ -37,9 +37,6 @@ export function MainSSR() {
         </div>  
     </div>
   `;
-}
 
-export default function Main(root) {
-  root.innerHTML = MainSSR();
-  root.className = styles['main'];
+   root.className = styles['main'];
 }

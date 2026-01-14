@@ -1,15 +1,7 @@
 import styles from "./component.module.css";
-import { TopbarSSR } from "./topbar.js";
 
-
-export function MainSSR() {
-  return `
-    <div  class="${styles['votetopbar']}">
-    ${TopbarSSR({
-        title: "Review Your Votes",
-        subtitle: "Please confirm before submitting"
-        })}
-    </div>
+export default function Main(root) {
+  root.innerHTML = `
 
     <div class="${styles['receipt-body']}">
       <!-- Header -->
@@ -166,9 +158,6 @@ export function MainSSR() {
       </div>  
     </div>
   `;
-}
 
-export default function Main(root) {
-  root.innerHTML = MainSSR();
-  root.className = styles['main'];
+   root.className = styles['main'];
 }

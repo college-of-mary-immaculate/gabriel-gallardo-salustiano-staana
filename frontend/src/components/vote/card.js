@@ -1,8 +1,8 @@
 //components/vote/card.js
 
-import styles from "./component.module.css";
- 
-export function CardSSR({ name, image}) {
+import styles from "../vote/component.module.css";
+
+export default function Card({ name, image }) {
   return `
     <div class="${styles['card']}">
         <div class="${styles['card_content']}">
@@ -13,8 +13,4 @@ export function CardSSR({ name, image}) {
         </div>
     </div>
   `;
-}
-
-export default function Card(container, {name}) {
-  container.innerHTML = CardSSR({ name });
 }
