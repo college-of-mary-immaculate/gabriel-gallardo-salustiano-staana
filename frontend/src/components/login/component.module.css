@@ -7,11 +7,11 @@
 }
 
 .logo-container {
-    flex: 1;
+    flex: 2;
     align-items: center;
     justify-content: center;
-    top: 150px;
-    left: 220px;
+    margin-top: 20px;
+    margin-left: 100px;
 }
 
 .logo-container-h2 {
@@ -35,7 +35,7 @@
     background-color: white;
     flex-direction: column;
     padding: 25px;
-    left: 880px;
+    margin-right: 110px;
     top: 85px;
     width: 530px;
     height: 540px;
@@ -45,16 +45,17 @@
 
 .label-voting {
     position: relative;
-    top: 30px;
+    top: 10px;
     text-align: center;
     margin-bottom: 50px;
 }
 
 .label-voting-h1 {
+    position: relative;
     font-size: 22px;
     font-weight: 600;
     color: #000;
-    margin-bottom: 20px;
+    bottom: 10px;
 }
 
 .label-voting-h3 {
@@ -68,23 +69,22 @@
 .user-input {
     position: relative;
     top: 30px;
-    left: 10px;
     width: 100%;
     align-items: left;
-    max-width: 460px;
+    max-width: 457px;
     margin-bottom: 25px;
 }
 
 .id-input,
 .password-input {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .id-input-p,
 .password-input-p {
     position: relative;
     font-size: 16px;
-    left: 23px;
+    left: 5px;
     font-weight: 500;
     color: #555;
     margin-bottom: 6px;
@@ -105,10 +105,10 @@
 }
 
 .login-btn {
-    width: 416px;
+    width: 377px;
     height: 47px;
     position: relative;
-    top: 45px;
+    top: 55px;
     background-color: #2563EB;
     color: white;
     font-size: 16px;
@@ -116,7 +116,6 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
-   
 }
 
 .login-btn:hover {
@@ -127,7 +126,7 @@
     font-size: 15px;
     font-weight: 400;
     position: relative;
-    top: 80px;
+    top: 75px;
     color: #888;
 }
 
@@ -145,15 +144,19 @@
 @media (max-width: 426px) {
     .login-form-body {
         flex-direction: column;
-        padding: 20px;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+        min-height: 100vh;
     }
 
     .logo-container {
-        position: static;
         width: 100%;
         display: flex;
         justify-content: center;
-        margin-bottom: 25px;
+        align-items: center;
+        margin: 0;
+        margin-bottom: 30px;
     }
 
     .logo-container-h2 {
@@ -167,25 +170,35 @@
         position: static;
         width: 100%;
         max-width: 425px;
-        margin: 0 auto;
         height: auto;
-        padding: 30px 25px;
+        margin: 0;
+        padding: 35px 30px;
+        top: 0;
     }
 
     .label-voting {
-        left: 0;
         top: 0;
         margin-bottom: 25px;
     }
 
+    .label-voting-h1 {
+        bottom: 0;
+        font-size: 22px;
+    }
+
     .label-voting-h3 {
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .user-input {
-        left: 0;
         top: 0;
-        max-width: 100%;
+        max-width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .id-input,
+    .password-input {
+        margin-bottom: 18px;
     }
 
     .id-input-p,
@@ -202,14 +215,12 @@
 
     .login-btn {
         width: 100%;
-        left: 0;
         top: 0;
-        margin-top: 15px;
+        margin-top: 10px;
         height: 47px;
     }
 
     .login-form-container > h3 {
-        left: 0;
         top: 0;
         margin-top: 20px;
         text-align: center;
@@ -220,11 +231,11 @@
 /* Medium Mobile: 375px */
 @media (max-width: 375px) {
     .login-form-body {
-        padding: 15px;
+        padding: 30px 15px;
     }
 
     .logo-container {
-        margin-bottom: 20px;
+        margin-bottom: 25px;
     }
 
     .logo-container-h2 {
@@ -234,8 +245,8 @@
         padding: 25px;
     }
 
-    .signup-form-container {
-        padding: 25px 20px;
+    .login-form-container {
+        padding: 30px 25px;
         border-radius: 15px;
     }
 
@@ -244,7 +255,11 @@
     }
 
     .label-voting-h1 {
-        font-size: 19px;
+        font-size: 20px;
+    }
+
+    .label-voting-h3 {
+        font-size: 13px;
     }
 
     .id-input,
@@ -278,11 +293,11 @@
 /* Small Mobile: 320px */
 @media (max-width: 320px) {
     .login-form-body {
-        padding: 12px;
+        padding: 25px 10px;
     }
 
     .logo-container {
-        margin-bottom: 18px;
+        margin-bottom: 20px;
     }
 
     .logo-container-h2 {
@@ -293,22 +308,20 @@
     }
 
     .login-form-container {
-        padding: 20px 15px;
+        padding: 25px 20px;
         border-radius: 12px;
     }
 
     .label-voting {
-        margin-bottom: 20px;
+        margin-bottom: 18px;
+    }
+
+    .label-voting-h1 {
+        font-size: 18px;
     }
 
     .label-voting-h3 {
-        font-size: 14px;
-        position: relative;
-        margin-top: 2px;
-    }
-
-    .label-voting-h2 {
-        font-size: 20px;
+        font-size: 12px;
     }
 
     .id-input,
@@ -324,7 +337,7 @@
 
     .id-field,
     .password-field {
-        padding: 9px 11px;
+        padding: 9px 10px;
         font-size: 13px;
     }
 
