@@ -8,7 +8,8 @@ export default function Confirmation(root) {
       <div class="${styles['page']}">
         <div class=${styles['card']}">
 
-          <div class="${styles['member']}">
+          <div class="${styles['container']}">
+            <div class="${styles['member']}">
             <div class="${styles['left']}">
               <img src="https://res.cloudinary.com/deogcjil5/image/upload/v1768116437/Screenshot_2026-01-11_152604-removebg-preview_becxso.png" alt="avatar">
               <div>
@@ -66,6 +67,7 @@ export default function Confirmation(root) {
           <div class="${styles['actions']}">
             <button class="${styles['cancel']}">Cancel</button>
             <button class="${styles['submit']}">Submit</button>
+          </div>          
           </div>
 
         </div>
