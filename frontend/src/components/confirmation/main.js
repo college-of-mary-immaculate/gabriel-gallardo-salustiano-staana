@@ -1,4 +1,4 @@
-import styles from "./confirmation.module.css";
+import styles from "./component.module.css";
 
 export default function Confirmation(root) {
    root.className = styles.main;
