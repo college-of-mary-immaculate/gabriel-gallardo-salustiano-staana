@@ -1,8 +1,8 @@
 .profile-body {
     display: flex;
-    flex-direction: row;
+    align-items: center;
     justify-content: center;
-    padding: 20px;
+    height: 90.8vh;
 }
 
 .profile-container {
@@ -10,6 +10,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    top: 0;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -48,7 +49,7 @@
 .profile-info-box {
     border-top: 2px solid #d0d0d0;
     border-bottom: 2px solid #d0d0d0;
-    width: 27%;
+    width: 80%;
     top: 360px;
 }
 
@@ -86,8 +87,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    top: 210px;
-    left: 150px;
+    margin-top: 20px;
 }
 
 .logout-btn:hover {

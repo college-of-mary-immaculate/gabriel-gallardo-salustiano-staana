@@ -31,7 +31,7 @@
 }
 
 .login-form-container {
-    flex: 1;
+    flex: 1.5;
     background-color: white;
     flex-direction: column;
     padding: 25px;
@@ -70,6 +70,7 @@
     position: relative;
     top: 30px;
     width: 100%;
+    margin-left: 20px;
     align-items: left;
     max-width: 457px;
     margin-bottom: 25px;
@@ -105,9 +106,10 @@
 }
 
 .login-btn {
-    width: 377px;
+    width: 440px;
     height: 47px;
     position: relative;
+    right: 4px;
     top: 55px;
     background-color: #2563EB;
     color: white;
@@ -140,7 +142,7 @@
     text-decoration: underline;
 }
 
-/* Large Mobile: 425px */
+/* Large Mobile */
 @media (max-width: 426px) {
     .login-form-body {
         flex-direction: column;
@@ -192,7 +194,7 @@
 
     .user-input {
         top: 0;
-        max-width: 90%;
+        max-width: 80%;
         margin-bottom: 20px;
     }
 
@@ -214,7 +216,8 @@
     }
 
     .login-btn {
-        width: 100%;
+        width: 89%;
+        margin-left: 10px;
         top: 0;
         margin-top: 10px;
         height: 47px;
@@ -228,8 +231,8 @@
     }
 }
 
-/* Medium Mobile: 375px */
-@media (max-width: 375px) {
+/* Medium Mobile*/
+@media (min-width: 375px) and (max-width: 425px) {
     .login-form-body {
         padding: 30px 15px;
     }
@@ -262,6 +265,11 @@
         font-size: 13px;
     }
 
+    .user-input {
+        position: relative;
+        right: 8px;
+    }
+
     .id-input,
     .password-input {
         margin-bottom: 16px;
@@ -280,6 +288,8 @@
     }
 
     .login-btn {
+        margin-left: 3px;
+        width: 89%;
         height: 45px;
         font-size: 15px;
     }
@@ -290,13 +300,15 @@
     }
 }
 
-/* Small Mobile: 320px */
+/* Small Mobile */
 @media (max-width: 320px) {
     .login-form-body {
-        padding: 25px 10px;
+        padding: 25px 15px;
     }
 
     .logo-container {
+        position: relative;
+        bottom: 12px;
         margin-bottom: 20px;
     }
 
@@ -308,6 +320,9 @@
     }
 
     .login-form-container {
+        position: static;
+        width: 100%;
+        max-width: 212px;
         padding: 25px 20px;
         border-radius: 12px;
     }
@@ -316,12 +331,21 @@
         margin-bottom: 18px;
     }
 
-    .label-voting-h1 {
+    .label-voting-h2 {
+        position: relative;
+        bottom: 10px;
         font-size: 18px;
     }
 
     .label-voting-h3 {
+        position: relative;
+        bottom: 10px;
         font-size: 12px;
+    }
+
+    .user-input {
+        position: relative;
+        right: 8px;
     }
 
     .id-input,
@@ -342,6 +366,8 @@
     }
 
     .login-btn {
+        margin-left: 12px;
+        width: 90%;
         height: 43px;
         font-size: 14px;
     }
