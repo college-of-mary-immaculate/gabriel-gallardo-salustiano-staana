@@ -66,3 +66,29 @@
 
 
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 2rem; 
+    text-align: center; 
+  }
+
+  .image-container {
+    order: -1; 
+  }
+
+  .content h1 {
+    font-size: 60px; 
+  }
+
+  .content h2 {
+    font-size: 30px; 
+    white-space: normal; 
+  }
+
+  .image-container img {
+    max-width: 100%; 
+    height: auto;
+  }
+}
