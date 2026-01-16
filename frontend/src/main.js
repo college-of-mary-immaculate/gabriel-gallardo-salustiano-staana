@@ -51,5 +51,6 @@ app.add("/login", Login);
 app.add("/signup", SignUp);
 app.add("/vote", Vote);
 app.add("/confirmation", Confirmation);
+app.add("/pageNotFound", PageNotFound);
 
 app.handleRouteChanges();
