@@ -11,13 +11,15 @@ export default function Main(root) {
   root.innerHTML = `
     <div class="${styles.votetopbar}">
       ${Topbar({
-        title: "Review Your Votes",
+        title: "President",
         subtitle: "Please confirm before submitting"
       })}
     </div>
 
-    <div class="${styles['main-content']}">
-      ${cardsHtml}
+    <div class="${styles['main-wrapper']}">
+      <div class="${styles['main-content']}">
+        ${cardsHtml}
+      </div>
     </div>
 
     <div class="${styles.footer}">
@@ -25,6 +27,4 @@ export default function Main(root) {
       <button class="${styles['vote-button']}">Vote</button>
     </div>
   `;
-
-  // root.className = styles.main;
 }

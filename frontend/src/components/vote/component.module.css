@@ -9,7 +9,6 @@
   overflow-y: hidden;
   overflow-x: hidden;
   padding-top: 0;
-  /* padding-right: 20px; */
   text-align: left;
   border-right: 1px solid #ccc;
   z-index: 100;
@@ -41,8 +40,8 @@
   left: max(250px, calc(50% - 710px));
   right: max(0px, calc(50% - 960px));
   background-color: #E8EAED;
-  margin-top:60px;
-  padding: 12px 60px;
+  margin-top: 60px;
+  padding: 35px 60px;
   display: flex;
   border-top: 1px solid rgba(69, 69, 69, 0.2);
   gap: 20px;
@@ -50,13 +49,7 @@
   align-items: center;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   z-index: 99;
-
-  background: linear-gradient(
-    90deg,
-    #003b6f 0%,
-    #005fa3 100%
-  );
-
+  background: linear-gradient(90deg, #003b6f 0%, #005fa3 100%);
   border-bottom: 2px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -80,36 +73,85 @@
   color: rgba(255, 255, 255, 0.85);
 }
 
+/* MAIN WRAPPER - New container for better scroll control */
+.main-wrapper {
+  position: fixed;
+  top: 172px; /* Adjusted for topbar + margin */
+  bottom: 90px; /* Space for footer */
+  left: max(250px, calc(50% - 710px));
+  right: max(0px, calc(50% - 960px));
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 60px;
+  
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+  
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 59, 111, 0.3) transparent;
+}
 
-/* MAIN */
+/* Webkit scrollbar styling */
+.main-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.main-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 59, 111, 0.3);
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.main-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 59, 111, 0.5);
+}
+
+/* MAIN CONTENT */
 .main-content {
-  margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
   width: 100%;
-  padding: 50px;
+  padding: 30px 0;
   justify-content: center;
   box-sizing: border-box;
-  height: fit-content;
-  overflow-y: auto;      /* allow scrolling */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE / Edge */
+  min-height: 100%;
 }
 
-/* Chrome, Safari, Opera */
-.main-content::-webkit-scrollbar {
-  display: none;
+/* Responsive grid adjustments */
+@media (max-width: 1200px) {
+  .main-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-/* From Uiverse.io by SachinKumar666 */ 
+@media (max-width: 900px) {
+  .main-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card styles */
 .card {
   --card-bg: #ffffff;
   --card-accent: #3a64ed;
-  --card-text: #003D6C;;
+  --card-text: #003D6C;
   --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
 
-  width: 200px;
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
   height: fit-content;
   background: var(--card-bg);
   border-radius: 10px;
@@ -136,15 +178,11 @@
   position: relative;
   width: 100%;
   height: 180px;
-
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   border-radius: 12px;
   overflow: hidden;
-
-  /* subtle depth */
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
@@ -204,7 +242,6 @@
 .card:active {
   transform: translateY(-5px) scale(0.98);
 }
-
 
 /* FOOTER */
 .footer {
