@@ -1,0 +1,40 @@
+{
+  "name": "gabriel-gallardo-salustiano-staana",
+  "version": "1.0.0",
+  "description": "CS PROF EL 3 Project",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server/index.js",
+    "api": "nodemon backend/index.js",
+    "frontend": "vite",
+    "dev:frontend": "concurrently --names \"socket,frontend\" --prefix-colors \"red,green\" \"npm run dev\" \"npm run frontend\"",
+    "build": "vite build --emptyOutDir",
+    "start": "concurrently --names \"build,publisher,subscriber1,subscriber2\" --prefix-colors \"blue,red,magenta,yellow\" \"npm run build\" \"PUBLISHER=true PORT=3000 npm run dev\" \"PORT=3001 npm run dev\" \"PORT=3002 npm run dev\"",
+    "test": "echo \"Error: not test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^5.2.1",
+    "googleapis": "^170.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.6.5",
+    "nodemailer": "^7.0.12",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3",
+    "validator": "^13.15.26"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.11",
+    "vite": "^7.2.4"
+  }
+}
