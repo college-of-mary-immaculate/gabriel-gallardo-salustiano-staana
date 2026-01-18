@@ -186,6 +186,61 @@
   transition: all 0.3s ease;
 }
 
+/* Progress Bar */
+.card_progress_container {
+  width: 100%;
+  margin-top: 0.5em;
+}
+
+.card_progress_label {
+  color: #64748b;
+  font-size: 0.75em;
+  margin: 0 0 0.4em 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card_progress_bar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card_progress_fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--card-accent) 0%, #667eea 100%);
+  border-radius: 10px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.card_progress_fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+.card_total_votes {
+  color: #64748b;
+  font-size: 0.9em;
+  margin: 0;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
 .card:hover .status_badge {
   transform: scale(1.1) rotate(5deg);
   box-shadow: 0 6px 16px rgba(255, 165, 0, 0.5);
