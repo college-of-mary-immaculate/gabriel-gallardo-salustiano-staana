@@ -2,10 +2,10 @@
 
 import styles from "../vote/component.module.css";
 
-export default function Card({ name, image, status_badge, total_votes }) {
+export default function Card({ name, image, rank_badge, total_votes }) {
   return `
     <div class="${styles["card"]}">
-      <div class="${styles["status_badge"]}">${status_badge}</div>
+      <div class="${styles["status_badge"]}">${rank_badge}</div>
       <div class="${styles["card_content"]}">
           <div class="${styles["card_image"]}" style="background-image: url('${image}')"></div>
           <div class="${styles["card_text"]}">
