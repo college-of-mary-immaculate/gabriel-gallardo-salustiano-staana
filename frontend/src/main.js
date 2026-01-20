@@ -30,6 +30,7 @@ import SignUp from "./pages/signup.js";
 import Vote from "./pages/vote.js";
 import Header from "./components/header/header.js";
 import Confirmation from "./pages/confirmation.js";
+import Winner from "./pages/winner.js";
 
 import "./styles/common.css";
 import "./components/header/header.css";
@@ -52,5 +53,5 @@ app.add("/signup", SignUp);
 app.add("/vote", Vote);
 app.add("/confirmation", Confirmation);
 app.add("/pageNotFound", PageNotFound);
-
+app.add("/winner", Winner);
 app.handleRouteChanges();
