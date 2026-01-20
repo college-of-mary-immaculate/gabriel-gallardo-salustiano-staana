@@ -1,20 +1,13 @@
-// import Layout from "../layouts/confirmationLayout.js";
-// import Main from "../components/confirmation/main.js";
-// import Header from "../components/confirmation/header.js"
-
-
-// export default function Confirmation() {
-//   const { header, main } = Layout(this.root);
-
-//   Header(header);
-//   Main(main);
-// }
-
 import Layout from "../layouts/default.js";
+import Header from "../components/header/header.js";
 import Main from "../components/confirmation/main.js";
+import Footer from "../components/footer/footer.js";
+import Events from "../components/confirmation/event.js";
 
-export default function Confirmation() {
-  const {main} = Layout(this.root);
-
+export default function ConfirmationPage() {
+  const { header, main, footer } = Layout(this.root);
+  Header(header);
   Main(main);
+  Footer(footer);
+  Events();
 }

@@ -1,56 +1,28 @@
-// import SPA from "./core/spa.js";
-// import PageNotFound from "./pages/pageNotFound.js";
-// import Home from "./pages/home.js";
-// import Login from "./pages/login.js";
-// import SignUp from "./pages/signup.js";
-
-// import "./styles/common.css";
-
-// const app = new SPA ({
-//   root: document.getElementById("app"),
-//   defaultRoute: PageNotFound
-// });
-
-// window.app = app;
-
-// // Add routes here
-// app.add("/", Home);
-// app.add("/login", Login);
-// app.add("/signup", SignUp);
-
-// app.handleRouteChanges();
-
-// src/main.js
-
-import SPA from "./core/spa.js";
-import PageNotFound from "./pages/pageNotFound.js";
-import Home from "./pages/home.js";
-import Login from "./pages/login.js";
-import SignUp from "./pages/signup.js";
-import Vote from "./pages/vote.js";
-import Header from "./components/header/header.js";
-import Confirmation from "./pages/confirmation.js";
-
 import "./styles/common.css";
-import "./components/header/header.css";
+import SPA from "./core/spa.js";
+import HomePage from "./pages/home.js";
+import PageNotFoundPage from "./pages/pageNotFound.js";
+import LoginPage from "./pages/login.js";
+import SignUpPage from "./pages/signup.js";
+import ProfilePage from "./pages/profile.js";
+import VotePage from "./pages/vote.js";
+import ReceiptPage from "./pages/receipt.js";
+import Confirmation from "./pages/confirmation.js";
 
 const app = new SPA({
   root: document.getElementById("app"),
-  defaultRoute: PageNotFound
+  defaultRoute: PageNotFoundPage,
 });
 
 window.app = app;
 
-// Initialize Header (it will automatically hide on login/signup pages)
-const header = new Header(app);
-window.appHeader = header;
-
 // Add routes here
-app.add("/", Home);
-app.add("/login", Login);
-app.add("/signup", SignUp);
-app.add("/vote", Vote);
+app.add("/", HomePage);
+app.add("/login", LoginPage);
+app.add("/signup", SignUpPage);
+app.add("/profile", ProfilePage);
+app.add("/vote", VotePage);
+app.add("/receipt", ReceiptPage);
 app.add("/confirmation", Confirmation);
-app.add("/pageNotFound", PageNotFound);
 
 app.handleRouteChanges();
