@@ -26,6 +26,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-bottom: 1rem;
 }
 
 .card {
@@ -97,7 +98,7 @@
   font-weight: 600;
   font-size: 13px;
   color: #004375;
-  margin-left: auto;
+  margin-left: 79px;
   padding-left: 10px; 
 }
 

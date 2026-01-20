@@ -6,8 +6,8 @@ export default function Winner(root) {
   root.innerHTML = `
   <body>
   <div class="${styles['container']}">
-    <h1 class="${styles['title']}">Title</h1>
-    <h2 class="${styles['subtitle']}">Subtitle</h2>
+    <h1 class="${styles['title']}">Election Winners</h1>
+    <h2 class="${styles['subtitle']}">Congratulations to the Elected Officials of the Republic</h2>
 
     <div class="${styles['cards']}">
       <div class="${styles['card']}">
