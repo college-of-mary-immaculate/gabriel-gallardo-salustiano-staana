@@ -5,7 +5,7 @@
   top: 0;
   height: 100vh;
   width: 250px;
-  background-color: #E8EAED;
+  background-color: #e8eaed;
   overflow-y: hidden;
   overflow-x: hidden;
   padding-top: 0;
@@ -27,6 +27,7 @@
 
 .sidebar-item:hover {
   background-color: #d8dadd;
+  color: #0f63c3e8;
 }
 
 .sidebar-item:first-child {
@@ -39,7 +40,7 @@
   top: 0;
   left: max(250px, calc(50% - 710px));
   right: max(0px, calc(50% - 960px));
-  background-color: #E8EAED;
+  background-color: #e8eaed;
   margin-top: 60px;
   padding: 35px 60px;
   display: flex;
@@ -69,7 +70,7 @@
 .topbar_subtitle {
   margin-top: 4px;
   margin-bottom: 0px;
-  font-size: 0.80rem;
+  font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.85);
 }
 
@@ -83,10 +84,10 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding: 0 60px;
-  
+
   /* Smooth scrolling */
   scroll-behavior: smooth;
-  
+
   /* Hide scrollbar but keep functionality */
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 59, 111, 0.3) transparent;
@@ -146,7 +147,7 @@
 .card {
   --card-bg: #ffffff;
   --card-accent: #3a64ed;
-  --card-text: #003D6C;
+  --card-text: #003d6c;
   --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
 
   width: 100%;
@@ -160,8 +161,114 @@
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: var(--card-shadow);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, sans-serif;
+}
+
+/* Status Badge */
+.status_badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 50px;
+  background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+  font-weight: 800;
+  font-size: 1.1em;
+  color: #ffffff;
+  box-shadow:
+    0 4px 12px rgba(255, 165, 0, 0.4),
+    0 0 20px rgba(255, 215, 0, 0.6),
+    0 0 30px rgba(255, 215, 0, 0.4),
+    0 0 40px rgba(255, 215, 0, 0.2);
+  z-index: 10;
+  border: 2px solid #ffd700;
+  transition: all 0.3s ease;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 4px 12px rgba(255, 165, 0, 0.4),
+      0 0 20px rgba(255, 215, 0, 0.6),
+      0 0 30px rgba(255, 215, 0, 0.4),
+      0 0 40px rgba(255, 215, 0, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 4px 12px rgba(255, 165, 0, 0.6),
+      0 0 25px rgba(255, 215, 0, 0.8),
+      0 0 35px rgba(255, 215, 0, 0.6),
+      0 0 50px rgba(255, 215, 0, 0.3);
+  }
+}
+
+/* Progress Bar */
+.card_progress_container {
+  width: 100%;
+  margin-top: 0.5em;
+}
+
+.card_progress_label {
+  color: #64748b;
+  font-size: 0.75em;
+  margin: 0 0 0.4em 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card_progress_bar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card_progress_fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--card-accent) 0%, #667eea 100%);
+  border-radius: 10px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.card_progress_fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+.card_total_votes {
+  color: #64748b;
+  font-size: 0.9em;
+  margin: 0;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.card:hover .status_badge {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 16px rgba(255, 165, 0, 0.5);
 }
 
 .card_content {
@@ -190,7 +297,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 30% 30%,
       rgba(255, 255, 255, 0.1) 0%,
       transparent 30%
@@ -249,7 +357,7 @@
   bottom: 0;
   left: max(250px, calc(50% - 710px));
   right: max(0px, calc(50% - 960px));
-  background-color: #E8EAED;
+  background-color: #e8eaed;
   padding: 20px 60px;
   display: flex;
   border-top: 1px solid rgba(69, 69, 69, 0.2);
