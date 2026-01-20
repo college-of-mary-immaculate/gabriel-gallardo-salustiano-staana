@@ -1,99 +1,98 @@
 .profile-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 90.8vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90.8vh;
 }
 
 .profile-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 500px;
-    width:600px;
-    max-width: 500px;
-    text-align: center;
-    
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 500px;
+  width: 600px;
+  max-width: 500px;
+  text-align: center;
 }
 
 .profile-img {
-    justify-content: center;
-    display: flex;
-    margin-bottom: 20px;
-    align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
 }
 
 .profile-img-img {
-    position: relative;
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .username {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    font-size: 22px;
-    font-weight: 600;
-    color: black;
-    top: 320px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 22px;
+  font-weight: 600;
+  color: black;
+  top: 320px;
 }
 
 .profile-info-box {
-    border-top: 2px solid #d0d0d0;
-    border-bottom: 2px solid #d0d0d0;
-    width: 80%;
-    top: 360px;
+  border-top: 2px solid #d0d0d0;
+  border-bottom: 2px solid #d0d0d0;
+  width: 80%;
+  top: 360px;
 }
 
 .info-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
 }
 
 .info-row:not(:last-child) {
-    border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .label {
-    font-size: 16px;
-    font-weight: 600;
-    color: #003D6C;
+  font-size: 16px;
+  font-weight: 600;
+  color: #003d6c;
 }
 
 .value {
-    font-size: 16px;
-    font-weight: 600;
-    color: black;
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
 }
 
 .logout-btn {
-    background-color: #FF4043;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    width: 120px;
-    height: 40px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
+  background-color: #ff4043;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  width: 120px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
 }
 
 .logout-btn:hover {
-    background-color: #ff3838;
+  background-color: #ff3838;
 }
 
 .logout-btn:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
