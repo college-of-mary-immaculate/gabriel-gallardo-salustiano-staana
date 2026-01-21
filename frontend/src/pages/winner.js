@@ -1,8 +1,9 @@
 import Layout from "../layouts/default.js";
 import Main from "../components/winner/main.js";
+import Header from "../components/header/header.js";
 
 export default function Winner() {
-  const {main} = Layout(this.root);
-
+  const { header, main } = Layout(this.root);
+  Header(header);
   Main(main);
 }

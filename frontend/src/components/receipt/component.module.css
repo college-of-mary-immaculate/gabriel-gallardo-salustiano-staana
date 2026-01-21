@@ -1,0 +1,156 @@
+/* Topbar */
+.topbar {
+  width: 100vw;
+  background-color: #0f172a; /* dark slate */
+  color: #ffffff;
+
+  /* force full-width even inside containers */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.topbar_content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.topbar_title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.topbar_subtitle {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin: 0;
+}
+
+
+/* MAIN */
+
+/* Receipt card */
+.receipt-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 420px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin: auto;
+  margin-top: 100px;
+}
+
+/* Header */
+.label-container {
+  background-color: #4c86ff;
+  padding: 16px;
+  text-align: center;
+}
+
+.label-h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Content area */
+.your-vote-container {
+  padding: 20px 24px 28px;
+  color: #333;
+  font-size: 13px;
+}
+
+/* Status badge */
+.vote-recorded {
+  display: inline-block;
+  background-color: #e6f7ec;
+  color: #2e8b57;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+  margin: 0 auto 10px;
+}
+
+/* Center helpers */
+.center {
+  text-align: center;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 16px 0;
+}
+
+/* Info rows (Voter, Location, Date, Time) */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.info-label {
+  color: #6b7280;
+}
+
+.info-value {
+  font-weight: 500;
+  color: #111827;
+}
+
+/* Section title */
+.section-title {
+  margin-top: 16px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Vote rows with dotted leader */
+.vote-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.vote-label {
+  white-space: nowrap;
+  color: #374151;
+}
+
+.vote-dots {
+  flex: 1;
+  border-bottom: 1px dotted #cfd4dc;
+  margin: 0 8px;
+  height: 1px;
+}
+
+.vote-value {
+  white-space: nowrap;
+  font-weight: 500;
+  color: #111827;
+}
+
+/* Spacing helpers */
+.mt-sm {
+  margin-top: 8px;
+}
+
+.mt-md {
+  margin-top: 16px;
+}

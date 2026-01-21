@@ -1,0 +1,220 @@
+.leaderboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6%;
+}
+
+.voting-tally {
+  display: flex;
+  flex-direction: column;
+  width: 50rem;
+  background: white;
+  border-radius: 10px;
+  padding: 15px 15px;
+  /* position: relative; */
+  /* max-width: 1260px; */
+  /* bottom: 20px; */
+  /* left: 60px; */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.voting-tally-h2 {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+  color: #1a1a1a;
+  margin-bottom: 0px;
+  margin-top: 0;
+}
+
+.total-votes {
+  font-size: 14px;
+  color: #666;
+  text-align: left;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.candidate-list {
+  display: flex;
+  gap: 1rem;
+  max-height: 320px; /* scroll after ~6 rows */
+  overflow-y: auto;
+}
+
+.candidate-column {
+  flex: 1; /* equal width columns */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0px 10px;
+}
+
+.candidate-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: white;
+  border: 1px solid #003d6c;
+  padding: 8px 8px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  margin-bottom: 2px;
+}
+
+.candidate-item:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.rank-number {
+  font-size: 18px;
+  font-weight: 700;
+  color: #666;
+  min-width: 25px;
+}
+
+.candidate-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.candidate-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  /* min-width: 120px; */
+}
+
+.progress-container {
+  flex: 1;
+  height: 15px;
+  width: max-content;
+  background: #e5e5e5;
+  border-radius: 20px;
+  overflow: hidden;
+  /* position: relative; */
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 20px;
+  transition: width 0.5s ease;
+}
+
+.progress-bar.blue {
+  background: #2563eb;
+}
+.progress-bar.light-blue {
+  background: #3b82f6;
+}
+.progress-bar.cyan {
+  background: #06b6d4;
+}
+.progress-bar.green {
+  background: #10b981;
+}
+.progress-bar.purple {
+  background: #a855f7;
+}
+
+.vote-count {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+  /* min-width: 80px; */
+  text-align: right;
+}
+
+.position-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white; /* contrast with blue gradient */
+  text-align: center;
+  margin: 1rem 0;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* CIRCLE */
+.circle-total-vote {
+  font-size: xx-large;
+  margin: 0;
+  font-weight: 600;
+  color: #90ee90;
+  font-family: "Rockwell", serif;
+  text-shadow: #1a1a1a 2px 2px 4px;
+
+  /* Smooth transition */
+  transition: all 0.3s ease;
+}
+
+.circle-total-vote:hover {
+  /* Light green glow shadow */
+  text-shadow:
+    0 0 20px rgba(144, 238, 144, 0.8),
+    0 0 30px rgba(144, 238, 144, 0.6),
+    0 0 40px rgba(50, 205, 50, 0.4);
+}
+
+.circles-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.circle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.circle {
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border: 5px solid #fff;
+}
+
+.circle:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* First and third circles are smaller */
+.circle.small {
+  width: 120px;
+  height: 120px;
+}
+
+/* Middle circle is larger */
+.circle.large {
+  width: 150px;
+  height: 150px;
+}
+
+.circle-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.circle-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #e6f4ff;
+  text-align: center;
+  margin: 0;
+}
