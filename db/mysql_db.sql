@@ -1,4 +1,14 @@
 -- Database Schema
+SET foreign_key_checks = 0;
+
+DROP TABLE IF EXISTS `Users`;
+DROP TABLE IF EXISTS `Election`;
+DROP TABLE IF EXISTS `Position`;
+DROP TABLE IF EXISTS `Candidate`;
+DROP TABLE IF EXISTS `Vote`;
+DROP TABLE IF EXISTS `Otp`;
+
+SET foreign_key_checks = 1;
 
 DROP TABLE IF EXISTS `User`;
 CREATE TABLE `User` (
@@ -58,7 +68,7 @@ CREATE TABLE `Candidate` (
 -- USER VOTES
 DROP TABLE IF EXISTS `Vote`;
 CREATE TABLE `Vote` (
-    `voteId` INT AUTO_INCREMEN,
+    `voteId` INT AUTO_INCREMENT,
     `userId` INT NOT NULL,
     `candidateId` INT NOT NULL,
     `voteTime` DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -69,7 +79,7 @@ CREATE TABLE `Vote` (
     FOREIGN KEY (candidateId) REFERENCES `Candidate`(candidateId) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---USER OTP
+-- USER Otp
 DROP TABLE IF EXISTS `Otp`;
 CREATE TABLE `Otp` (
     `otp`              VARCHAR(128)   NOT NULL,

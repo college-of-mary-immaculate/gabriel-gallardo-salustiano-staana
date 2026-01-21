@@ -11,6 +11,7 @@ candidateRouter.use(authorization);
 candidateRouter.get("/", candidate.getAll.bind(candidate));
 candidateRouter.get("/:candidateId", candidate.get.bind(candidate));
 candidateRouter.post("/", candidate.create.bind(candidate));
+candidateRouter.post("/bulk", candidate.createBulk.bind(candidate));
 candidateRouter.patch("/", candidate.update.bind(candidate));
 candidateRouter.delete("/", candidate.delete.bind(candidate));
 
