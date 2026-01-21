@@ -11,6 +11,7 @@ positionRouter.use(authorization);
 positionRouter.get("/", position.getAll.bind(position));
 positionRouter.get("/:positionId", position.get.bind(position));
 positionRouter.post("/", position.create.bind(position));
+positionRouter.post("/bulk", position.createBulk.bind(position));
 positionRouter.patch("/", position.update.bind(position));
 positionRouter.delete("/", position.delete.bind(position));
 

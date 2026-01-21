@@ -6,6 +6,33 @@ class CandidateController {
     this.candidate = new Candidate();
   }
 
+  async createBulk(request, response) {
+    try {
+      // candidates expects = [{ fullname, description, imageUrl }, ...]
+      const { positionId, candidates } = request.body || {};
+
+      if (!Array.isArray(candidates) || candidates.length === 0) {
+        return response.status(400).json({
+          success: false,
+          message: "candidates must be a non-empty array",
+        });
+      }
+
+      const results = await this.candidate.createBatch(positionId, candidates);
+
+      response.status(201).json({
+        success: true,
+        created: results.affectedRows,
+        positionId,
+      });
+    } catch (error) {
+      response.status(500).json({
+        success: false,
+        message: error.toString(),
+      });
+    }
+  }
+
   async create(request, response) {
     try {
       const { positionId, fullname, description = "", imageUrl = "" } = request.body || {};
