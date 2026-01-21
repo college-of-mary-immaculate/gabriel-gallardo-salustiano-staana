@@ -53,6 +53,19 @@ body.page-leaderboard {
   min-height: 100vh;
   background-attachment: fixed;
 }
+
+body.page-winner {
+  background: linear-gradient(
+    135deg,
+    #061b5f 0%,
+    #0a2472 25%,
+    #2e6aca 50%,
+    #133a90 75%,
+    #1e3a8a 100%
+  );
+  min-height: 100vh;
+  background-attachment: fixed;
+}
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
