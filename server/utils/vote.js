@@ -1,7 +1,6 @@
-// server/utils/tallyVotes.js
+// server/utils/vote.js
 import axios from "axios";
 
-// Tallies votes per election using the backend API (to be called by master socket, or slave for refresh)
 export async function fetchTally(electionId) {
   try {
     const response = await axios.get(`http://${process.env.API_HOST}:${process.env.API_PORT}/api/v1/vote?electionId=${electionId}`, {
