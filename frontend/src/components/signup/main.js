@@ -1,4 +1,7 @@
 import styles from "./component.module.css";
+import { initPasswordToggle } from "./event.js";
+import eye from "../../assets/icons/hide.png";
+import eyeOff from "../../assets/icons/visible.png";
 
 export default function Confirmation(root) {
   root.innerHTML = `
@@ -30,7 +33,52 @@ export default function Confirmation(root) {
                     
                     <div class="${styles["password-input"]}">
                         <p class="${styles["password-input-p"]}">Password</p>
-                        <input type="text" class="${styles["password-field"]}">
+
+                        <div class="${styles["password-wrapper"]}">
+                            <input
+                            type="password"
+                            id="password"
+                            class="${styles["password-field"]}"
+                            />
+
+                            <button
+                            type="button"
+                            id="togglePassword"
+                            class="${styles["eye-btn"]}"
+                            aria-label="Show password"
+                            >
+                            <img
+                                id="eyeIcon"
+                                src="${eye}"
+                                alt="Show password"
+                            />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="${styles["confirm-password-input"]}">
+                        <p class="${styles["password-input-p"]}">Confirm Password</p>
+
+                        <div class="${styles["password-wrapper"]}">
+                            <input
+                            type="password"
+                            id="password"
+                            class="${styles["password-field"]}"
+                            />
+
+                            <button
+                            type="button"
+                            id="togglePassword"
+                            class="${styles["eye-btn"]}"
+                            aria-label="Show password"
+                            >
+                            <img
+                                id="eyeIcon"
+                                src="${eye}"
+                                alt="Show password"
+                            />
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -41,4 +89,5 @@ export default function Confirmation(root) {
   `;
 
   root.className = styles["main"];
+  initPasswordToggle(eye, eyeOff);
 }
