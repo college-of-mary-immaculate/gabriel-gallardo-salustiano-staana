@@ -11,7 +11,7 @@ export default function Confirmation(root) {
           <div class="${styles["container"]}">
             <div class="${styles["member"]}">
             <div class="${styles["left"]}">
-              <img src="https://res.cloudinary.com/deogcjil5/image/upload/v1768116437/Screenshot_2026-01-11_152604-removebg-preview_becxso.png" alt="avatar">
+              <img src="https://res.cloudinary.com/hamsters-api/image/upload/v1767584015/v8_cdshyj.avif" alt="avatar">
               <div>
                 <p class="${styles["role"]}">President</p>
                 <p class="${styles["name"]}">Juan Cruz</p>
@@ -22,7 +22,7 @@ export default function Confirmation(root) {
 
           <div class="${styles["member"]}">
             <div class="${styles["left"]}">
-              <img src="https://res.cloudinary.com/deogcjil5/image/upload/v1768116437/Screenshot_2026-01-11_152604-removebg-preview_becxso.png" alt="avatar">
+              <img src="https://res.cloudinary.com/hamsters-api/image/upload/v1767584015/v8_cdshyj.avif" alt="avatar">
               <div>
                 <p class="${styles["role"]}">President</p>
                 <p class="${styles["name"]}">Juan Cruz</p>
@@ -33,7 +33,7 @@ export default function Confirmation(root) {
 
           <div class="${styles["member"]}">
             <div class="${styles["left"]}">
-              <img src="https://res.cloudinary.com/deogcjil5/image/upload/v1768116437/Screenshot_2026-01-11_152604-removebg-preview_becxso.png" alt="avatar">
+              <img src="https://res.cloudinary.com/hamsters-api/image/upload/v1767584015/v8_cdshyj.avif" alt="avatar">
               <div>
                 <p class="${styles["role"]}">President</p>
                 <p class="${styles["name"]}">Juan Cruz</p>
@@ -44,7 +44,7 @@ export default function Confirmation(root) {
 
           <div class="${styles["member"]}">
             <div class="${styles["left"]}">
-              <img src="https://res.cloudinary.com/deogcjil5/image/upload/v1768116437/Screenshot_2026-01-11_152604-removebg-preview_becxso.png" alt="avatar">
+              <img src="https://res.cloudinary.com/hamsters-api/image/upload/v1767584015/v8_cdshyj.avif" alt="avatar">
               <div>
                 <p class="${styles["role"]}">President</p>
                 <p class="${styles["name"]}">Juan Cruz</p>
@@ -55,7 +55,7 @@ export default function Confirmation(root) {
 
           <div class="${styles["member"]}">
             <div class="${styles["left"]}">
-              <img src="https://res.cloudinary.com/deogcjil5/image/upload/v1768116437/Screenshot_2026-01-11_152604-removebg-preview_becxso.png" alt="avatar">
+              <img src="https://res.cloudinary.com/hamsters-api/image/upload/v1767584015/v8_cdshyj.avif" alt="avatar">
               <div>
                 <p class="${styles["role"]}">President</p>
                 <p class="${styles["name"]}">Juan Cruz</p>
