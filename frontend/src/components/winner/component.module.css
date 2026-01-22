@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 12%;
+  padding: 15%;
+  margin: 10px;
 }
 
 .container {
@@ -10,7 +11,7 @@
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   width: fit-content;
-  padding: 10px;
+  padding: 20px;
 }
 
 .title {
@@ -44,6 +45,7 @@
   border-radius: 10px;
   position: relative;
   transition: all 0.3s ease;
+  width: max-content;
 }
 
 .card:hover {
@@ -170,34 +172,6 @@
 
   .percent {
     font-size: 14px;
-    margin-left: 250px;
-  }
-}
-
-@media (max-width: 375px) {
-  .container {
-    padding: 20px 15px;
-  }
-
-  .title {
-    font-size: 1.3rem;
-  }
-
-  .subtitle {
-    font-size: 0.85rem;
-  }
-
-  .avatar {
-    width: 40px;
-    height: 40px;
-  }
-
-  .name {
-    font-size: 0.9rem;
-  }
-
-  .percent {
-    font-size: 12px;
     margin-left: 250px;
   }
 }

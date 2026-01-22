@@ -4,7 +4,7 @@
   align-items: center;
   margin: 0;
   background: #f0f2f5;
-  padding: 10%;
+  padding: 18%;
 }
 
 .card {
@@ -27,8 +27,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #5b8cef95;
-  border-radius: 14px;
+  border: 1px solid #cfd8e3;
+  border-radius: 10px;
   padding: 12px 16px;
   margin-bottom: 12px;
   transition: all 0.3s ease;
@@ -53,9 +53,9 @@
 
 .role {
   margin: 0;
-  font-weight: 600;
-  color: #0b4fb3;
   font-size: 14px;
+  font-weight: bold;
+  color: #000000;
 }
 
 .name {
@@ -95,25 +95,31 @@
 }
 
 .cancel {
-  background: #ff4d4d;
-  color: #fff;
-  transition: all 0.3s ease;
+  background-color: #ff5252;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+  color: white;
+  font-weight: 600;
 }
 
 .submit {
-  background: #0db14b;
-  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
   transition: all 0.3s ease;
+  background-color: #51cf66;
+  color: white;
+  font-weight: 600;
 }
 
 .cancel:hover {
-  background: #e43c3c;
+  background-color: #ff5252;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(81, 207, 102, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
 }
 
 .submit:hover {
-  background: #0aa143;
+  background-color: #40c057;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(81, 207, 102, 0.3);
 }
@@ -146,8 +152,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #5b8cef95;
-    border-radius: 14px;
     padding: 12px 16px;
     margin-bottom: 12px;
   }
@@ -167,8 +171,6 @@
 
   .role {
     margin: 0;
-    font-weight: 600;
-    color: #0b4fb3;
     font-size: 14px;
   }
 
@@ -206,23 +208,5 @@
     border: none;
     font-weight: bold;
     cursor: pointer;
-  }
-
-  .cancel {
-    background: #ff4d4d;
-    color: #fff;
-  }
-
-  .submit {
-    background: #0db14b;
-    color: #fff;
-  }
-
-  .cancel:hover {
-    background: #e43c3c;
-  }
-
-  .submit:hover {
-    background: #0aa143;
   }
 }

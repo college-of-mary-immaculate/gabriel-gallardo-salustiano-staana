@@ -8,6 +8,8 @@
 .voting-tally {
   display: flex;
   flex-direction: column;
+  /* width: 100%;
+  max-width: 50rem; */
   width: 50rem;
   background: white;
   border-radius: 10px;
@@ -217,4 +219,131 @@
   color: #e6f4ff;
   text-align: center;
   margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .voting-tally {
+    width: 100%;
+    max-width: 50rem;
+  }
+
+  .leaderboard-container {
+    padding: 4%;
+  }
+
+  .candidate-list {
+    gap: 0.5rem;
+  }
+
+  .candidate-column {
+    margin: 0 5px;
+  }
+
+  .circle.large {
+    width: 100px;
+    height: 100px;
+  }
+
+  .circle.small {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .voting-tally {
+    padding: 12px;
+  }
+
+  .candidate-list {
+    flex-direction: column;
+    max-height: none;
+  }
+
+  .candidate-column {
+    margin: 0;
+  }
+
+  .candidate-item {
+    gap: 10px;
+    padding: 8px;
+  }
+
+  .candidate-name {
+    font-size: 14px;
+  }
+
+  .vote-count {
+    font-size: 13px;
+  }
+
+  .progress-container {
+    flex: 1;
+    width: 100%;
+  }
+
+  .position-title {
+    font-size: 1.5rem;
+  }
+
+  .circles-wrapper {
+    gap: 20px;
+  }
+
+  .circle.large {
+    width: 110px;
+    height: 110px;
+  }
+
+  .circle.small {
+    width: 90px;
+    height: 90px;
+  }
+
+  .circle-name {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboard-container {
+    padding: 10%;
+  }
+
+  .voting-tally-h2 {
+    font-size: 14px;
+  }
+
+  .total-votes {
+    font-size: 12px;
+  }
+
+  .rank-number {
+    font-size: 14px;
+    min-width: 20px;
+  }
+
+  .circle-container {
+    flex-direction: row;
+  }
+
+  .candidate-avatar {
+    width: 24px;
+    height: 24px;
+  }
+
+  .circle-total-vote {
+    font-size: 1.5rem;
+  }
+
+  .circles-wrapper {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .circle.large,
+  .circle.small {
+    width: 60px;
+    height: 60px;
+  }
 }
