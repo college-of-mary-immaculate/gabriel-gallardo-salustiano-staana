@@ -68,12 +68,12 @@
   margin-bottom: 20px;
 }
 
-.id-input,
+.email-input,
 .password-input {
   margin-bottom: 20px;
 }
 
-.id-input-p,
+.email-input-p,
 .password-input-p {
   font-size: clamp(14px, 2.5vw, 16px);
   font-weight: 500;
@@ -98,6 +98,31 @@
 .id-field:focus,
 .password-field:focus {
   border-color: #2563eb;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.eye-btn:focus {
+  outline: none;
+}
+
+.eye-btn img {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 .login-btn {
@@ -177,7 +202,7 @@
     margin-bottom: 25px;
   }
 
-  .id-input,
+  .email-input,
   .password-input {
     margin-bottom: 15px;
   }
@@ -229,7 +254,7 @@
     margin-bottom: 18px;
   }
 
-  .id-input,
+  .email-input,
   .password-input {
     margin-bottom: 12px;
   }
