@@ -1,15 +1,29 @@
-.footer-content {
+.app-footer {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 64px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: 1rem;
+}
+
+.footer-container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
   height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: self-end;
+  justify-content: space-between;
 }
 
 .footer-content-p {
   color: black;
+  margin: 0%;
 }
 
 /* Responsive */
