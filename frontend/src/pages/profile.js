@@ -1,4 +1,4 @@
-import AuthTemplate from "../layouts/auth.js";
+import AuthTemplate from "../layouts/default.js";
 import Main from "../components/profile/main.js";
 import Events from "../components/profile/event.js";
 

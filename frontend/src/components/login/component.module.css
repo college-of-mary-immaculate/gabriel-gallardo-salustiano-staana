@@ -3,121 +3,115 @@
 .login-form-body {
   display: flex;
   flex-direction: row;
+  gap: 16rem;
   padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .logo-container {
-  flex: 2;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
-  margin-left: 100px;
+  flex: 1;
+  min-width: 0;
 }
 
 .logo-container-h2 {
   background-color: #00172b;
   color: #d4d4ff;
-  width: 400px;
-  height: 400px;
+  width: min(350px, 90vw);
+  height: min(250px, 90vw);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 32px;
+  font-size: clamp(24px, 5vw, 32px);
   font-weight: 600;
   letter-spacing: 0.5px;
   padding: 50px;
 }
 
 .login-form-container {
-  flex: 1.5;
+  flex: 1;
   background-color: white;
+  display: flex;
   flex-direction: column;
-  padding: 25px;
-  /* margin-right: 110px; */
-  top: 85px;
-  width: 530px;
-  height: 540px;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
-  border-radius: 20px;
+  padding: 30px;
+  max-width: 600px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
 }
 
 .label-voting {
-  position: relative;
-  top: 10px;
-  text-align: center;
-  /* margin-bottom: 50px; */
+  text-align: left;
+  margin-bottom: 30px;
 }
 
 .label-voting-h1 {
-  position: relative;
-  font-size: 22px;
+  font-size: clamp(20px, 4vw, 22px);
   font-weight: 600;
   color: #000;
-  bottom: 10px;
+  margin: 0 0 10px 0;
 }
 
 .label-voting-h3 {
-  position: relative;
-  font-size: 16px;
+  font-size: clamp(14px, 3vw, 16px);
   font-weight: 400;
-  margin-top: 10px;
   color: #888;
+  margin: 0;
 }
 
 .user-input {
-  position: relative;
-  top: 30px;
   width: 100%;
-  /* margin-left: 20px; */
-  align-items: left;
-  max-width: 457px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .id-input,
 .password-input {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .id-input-p,
 .password-input-p {
-  position: relative;
-  font-size: 16px;
-  left: 5px;
+  font-size: clamp(14px, 2.5vw, 16px);
   font-weight: 500;
   color: #555;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   text-align: left;
 }
 
 .id-field,
 .password-field {
-  width: 90%;
-  position: relative;
-  left: 0px;
-  padding: 8px 14px;
-  font-size: 14px;
+  width: 100%;
+  padding: 12px 14px;
+  font-size: clamp(14px, 2.5vw, 16px);
   border: 2px solid #c8c8c8;
   border-radius: 10px;
   outline: none;
   background-color: white;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.id-field:focus,
+.password-field:focus {
+  border-color: #2563eb;
 }
 
 .login-btn {
-  width: 440px;
+  width: 100%;
   height: 47px;
-  position: relative;
-  right: 4px;
-  top: 55px;
   background-color: #2563eb;
   color: white;
-  font-size: 16px;
+  font-size: clamp(14px, 3vw, 16px);
   font-weight: 600;
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  margin-bottom: 15px;
+  transition: background-color 0.2s;
 }
 
 .login-btn:hover {
@@ -125,11 +119,11 @@
 }
 
 .login-form-container > h3 {
-  font-size: 15px;
+  font-size: clamp(13px, 2.5vw, 15px);
   font-weight: 400;
-  position: relative;
-  top: 75px;
   color: #888;
+  text-align: center;
+  margin: 0;
 }
 
 .login-form-container > h3 a {
@@ -142,243 +136,105 @@
   text-decoration: underline;
 }
 
-/* Large Mobile */
-@media (max-width: 426px) {
+/* Tablet Styles */
+@media (max-width: 1024px) {
   .login-form-body {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-    min-height: 100vh;
-  }
-
-  .logo-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    margin-bottom: 30px;
+    gap: 30px;
+    padding: 15px;
   }
 
   .logo-container-h2 {
-    width: 180px;
-    height: 180px;
-    font-size: 20px;
+    width: min(280px, 85vw);
+    height: min(280px, 85vw);
+    padding: 40px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .login-form-body {
+    flex-direction: column;
+    gap: 30px;
+    padding: 10px;
+  }
+
+  .logo-container {
+    order: -1;
+  }
+
+  .logo-container-h2 {
+    width: min(220px, 80vw);
+    height: min(220px, 80vw);
     padding: 30px;
   }
 
   .login-form-container {
-    position: static;
-    width: 100%;
-    max-width: 425px;
-    height: auto;
-    margin: 0;
-    padding: 35px 30px;
-    top: 0;
+    max-width: 100%;
+    padding: 25px;
   }
 
   .label-voting {
-    top: 0;
     margin-bottom: 25px;
-  }
-
-  .label-voting-h1 {
-    bottom: 0;
-    font-size: 22px;
-  }
-
-  .label-voting-h3 {
-    font-size: 14px;
-  }
-
-  .user-input {
-    top: 0;
-    /* max-width: 80%; */
-    margin-bottom: 20px;
   }
 
   .id-input,
   .password-input {
-    margin-bottom: 18px;
-  }
-
-  .id-input-p,
-  .password-input-p {
-    left: 0;
-    font-size: 15px;
-  }
-
-  .id-field,
-  .password-field {
-    width: 100%;
-    padding: 11px 14px;
-  }
-
-  .login-btn {
-    /* width: 89%; */
-    /* margin-left: 10px; */
-    top: 0;
-    margin-top: 10px;
-    height: 47px;
-  }
-
-  .login-form-container > h3 {
-    top: 0;
-    margin-top: 20px;
-    text-align: center;
-    font-size: 14px;
+    margin-bottom: 15px;
   }
 }
 
-/* Medium Mobile*/
-@media (min-width: 375px) and (max-width: 425px) {
+/* Small Mobile Styles */
+@media (max-width: 480px) {
   .login-form-body {
-    padding: 30px 15px;
-  }
-
-  .logo-container {
-    margin-bottom: 25px;
+    gap: 20px;
   }
 
   .logo-container-h2 {
-    width: 160px;
-    height: 160px;
-    font-size: 18px;
+    width: min(180px, 75vw);
+    height: min(180px, 75vw);
     padding: 25px;
   }
 
   .login-form-container {
-    padding: 30px 25px;
-    border-radius: 15px;
+    padding: 20px;
   }
 
   .label-voting {
     margin-bottom: 20px;
   }
 
-  .label-voting-h1 {
-    font-size: 20px;
-  }
-
-  .label-voting-h3 {
-    font-size: 13px;
-  }
-
-  .user-input {
-    /* position: center; */
-    right: 12px;
-    /* top: 30px; */
-    width: 100%;
-    /* align-items: left; */
-    margin-bottom: 25px;
-  }
-
-  .id-input,
-  .password-input {
-    margin-bottom: 16px;
-  }
-
-  .id-input-p,
-  .password-input-p {
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
-
-  .id-field,
-  .password-field {
-    padding: 10px 12px;
-    font-size: 14px;
-  }
-
   .login-btn {
-    /* margin-left: 3px; */
-    /* padding: 0px 10px; */
-    width: 30%;
-    /* height: 45px; */
-    font-size: 15px;
-  }
-
-  .login-form-container > h3 {
-    font-size: 13px;
-    margin-top: 18px;
+    height: 44px;
   }
 }
 
-/* Small Mobile */
-@media (max-width: 320px) {
+/* Extra Small Mobile */
+@media (max-width: 360px) {
   .login-form-body {
-    padding: 25px 15px;
-  }
-
-  .logo-container {
-    position: relative;
-    bottom: 12px;
-    margin-bottom: 20px;
+    gap: 15px;
+    padding: 8px;
   }
 
   .logo-container-h2 {
-    width: 140px;
-    height: 140px;
-    font-size: 16px;
+    width: min(160px, 70vw);
+    height: min(160px, 70vw);
     padding: 20px;
   }
 
   .login-form-container {
-    position: static;
-    width: 100%;
-    max-width: 212px;
-    padding: 25px 20px;
-    border-radius: 12px;
+    padding: 18px;
   }
 
   .label-voting {
     margin-bottom: 18px;
   }
 
-  .label-voting-h2 {
-    position: relative;
-    bottom: 10px;
-    font-size: 18px;
-  }
-
-  .label-voting-h3 {
-    position: relative;
-    bottom: 10px;
-    font-size: 12px;
-  }
-
-  .user-input {
-    position: center;
-    right: 8px;
-  }
-
   .id-input,
   .password-input {
-    margin-bottom: 14px;
-  }
-
-  .id-input-p,
-  .password-input-p {
-    font-size: 13px;
-    margin-bottom: 4px;
-  }
-
-  .id-field,
-  .password-field {
-    padding: 9px 10px;
-    font-size: 13px;
+    margin-bottom: 12px;
   }
 
   .login-btn {
-    margin-left: 12px;
-    width: 90%;
-    height: 43px;
-    font-size: 14px;
-  }
-
-  .login-form-container > h3 {
-    font-size: 12px;
-    margin-top: 16px;
+    height: 42px;
   }
 }
