@@ -56,6 +56,40 @@ class ElectionController {
     }
   }
 
+  async getLastElection(request, response) {
+    try {
+      const { offset } = request.query;
+      const result = await this.election.getLastElection(offset);
+
+      response.status(200).json({
+        success: true,
+        result,
+      });
+    } catch (error) {
+      response.status(500).json({
+        success: false,
+        message: error.toString(),
+      });
+    }
+  }
+
+  async getWinners(request, response) {
+    try {
+      const { electionId } = request.query;
+      const winners = await this.election.getWinners(electionId);
+
+      response.status(200).json({
+        success: true,
+        winners,
+      });
+    } catch (error) {
+      response.status(500).json({
+        success: false,
+        message: error.toString(),
+      });
+    }
+  }
+
   async end(request, response) {
     try {
       const { electionId } = request.body || {};

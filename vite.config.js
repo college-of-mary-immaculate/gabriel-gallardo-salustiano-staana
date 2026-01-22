@@ -5,10 +5,10 @@ export default {
   },
   publicDir: "../frontend/public",
   server: {
-    port: 5173, // Vite dev server port (default)
+    port: 5173,
     proxy: {
       "/socket.io": {
-        target: "http://localhost:3000", // Publisher server
+        target: "http://localhost:3000",
         ws: true,
         changeOrigin: true,
       },
