@@ -96,3 +96,15 @@
 .logout-btn:active {
   transform: scale(0.98);
 }
+
+@media (max-width: 768px) {
+  .signup-form-body {
+    flex-direction: column;
+    gap: 30px;
+    padding: 10px;
+  }
+
+  .profile-container {
+    width: 200px;
+  }
+}
