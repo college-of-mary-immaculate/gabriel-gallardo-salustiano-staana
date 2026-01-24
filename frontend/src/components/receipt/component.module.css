@@ -35,7 +35,6 @@
   margin: 0;
 }
 
-
 /* MAIN */
 
 /* Receipt card */
@@ -153,4 +152,19 @@
 
 .mt-md {
   margin-top: 16px;
+}
+
+@media only screen and (max-width: 600px) {
+  .receipt-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin: auto;
+    margin-top: 100px;
+  }
 }
