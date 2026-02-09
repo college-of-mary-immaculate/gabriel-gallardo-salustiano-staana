@@ -1,0 +1,169 @@
+services:
+  mysql_master:
+    image: mariadb:10.3
+    env_file:
+      - ./master/mysql_master.env
+    container_name: "mysql_master"
+    restart: "no"
+    ports:
+      - 4406:3306
+    volumes:
+      - ./master/conf/mysql.conf.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+      - ./master/data:/var/lib/mysql
+      - ./db:/db
+    networks:
+      - server-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p111"]
+      timeout: 20s
+      retries: 10
+      interval: 5s
+      start_period: 40s
+
+  mysql_slave:
+    image: mariadb:10.3
+    env_file:
+      - ./slave/mysql_slave.env
+    container_name: "mysql_slave"
+    restart: "no"
+    ports:
+      - 5506:3306
+    depends_on:
+      mysql_master:
+        condition: service_healthy
+    volumes:
+      - ./slave/conf/mysql.conf.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+      - ./slave/data:/var/lib/mysql
+      - ./db:/db
+    networks:
+      - server-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p111"]
+      timeout: 20s
+      retries: 10
+      interval: 5s
+      start_period: 40s
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    expose:
+      - 5000
+    environment:
+      - API_PORT=5000
+      - API_KEY=voteph
+      - API_SECRET_KEY=voteph
+      - MASTER_DB_HOST=mysql_master
+      - MASTER_DB_USER=mydb_user
+      - MASTER_DB_PASS=mydb_pwd
+      - MASTER_DB_NAME=mydb
+      - MASTER_DB_PORT=3306
+      - SLAVE_DB_HOST=mysql_slave
+      - SLAVE_DB_USER=mydb_slave_user
+      - SLAVE_DB_PASS=mydb_slave_pwd
+      - SLAVE_DB_NAME=mydb
+      - SLAVE_DB_PORT=3306
+
+      # - DB_HOST=172.30.128.1
+      # - DB_USER=voteph
+      # - DB_PASS=voteph
+      # - DB_NAME=vote_ph
+      # - DB_PORT=3306
+    ports:
+      - 5000:5000
+    depends_on:
+      mysql_master:
+        condition: service_healthy
+      mysql_slave:
+        condition: service_healthy
+    networks:
+      - server-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:5000/api/v1 || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  socketserver1:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    expose:
+      - 3000
+    environment:
+      - API_PORT=5000
+      - API_HOST=backend
+      - API_KEY=voteph
+      - PORT=3000
+      - SERVER_NAME=socketserver1
+      - PORTS=socketserver1:3000,socketserver2:3001,socketserver3:3002
+      - PUBLISHER=true
+      - CONTAINERIZED=true
+    ports:
+      - 3000:3000
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - server-network
+  socketserver2:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    expose:
+      - 3001
+    environment:
+      - API_PORT=5000
+      - API_HOST=backend
+      - API_KEY=voteph
+      - PORT=3001
+      - SERVER_NAME=socketserver2
+      - PORTS=socketserver1:3000,socketserver2:3001,socketserver3:3002
+      - PUBLISHER=false
+      - CONTAINERIZED=true
+    ports:
+      - 3001:3001
+    depends_on:
+      - backend
+      - socketserver1
+    networks:
+      - server-network
+  socketserver3:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    expose:
+      - 3002
+    environment:
+      - API_PORT=5000
+      - API_HOST=backend
+      - API_KEY=voteph
+      - PORT=3002
+      - SERVER_NAME=socketserver3
+      - PORTS=socketserver1:3000,socketserver2:3001,socketserver3:3002
+      - PUBLISHER=false
+      - CONTAINERIZED=true
+    ports:
+      - 3002:3002
+    depends_on:
+      - backend
+      - socketserver2
+    networks:
+      - server-network
+  loadbalancer:
+    build: ./haproxy
+    ports:
+      - 80:80
+      - 8404:8404
+    depends_on:
+      - socketserver1
+      - socketserver2
+      - socketserver3
+    networks:
+      - server-network
+
+networks:
+  server-network:
+    driver: bridge
