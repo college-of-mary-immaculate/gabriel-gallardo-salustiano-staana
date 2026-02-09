@@ -138,4 +138,6 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-SETUP.md
+# MySQL data directories
+master/data/
+slave/data/
