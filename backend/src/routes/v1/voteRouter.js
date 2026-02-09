@@ -8,11 +8,10 @@ const vote = new VoteController();
 
 voteRouter.use(authorization);
 
-voteRouter.get("/", vote.getAll.bind(vote));
-voteRouter.get("/candidate", vote.get.bind(vote));
+voteRouter.get("/", vote.getVoteCounts.bind(vote));
 voteRouter.get("/hasVoted", vote.hasVoted.bind(vote));
-voteRouter.get("/hasVotedAll", vote.hasVotedAll.bind(vote));
-// voteRouter.post("/", vote.create.bind(vote));
-voteRouter.post("/", vote.createBatch.bind(vote));
+voteRouter.get("/hasVotedInElection", vote.hasVotedInElection.bind(vote));
+voteRouter.post("/", vote.create.bind(vote));
+voteRouter.post("/batch", vote.createBatch.bind(vote));
 
 export default voteRouter;

@@ -12,7 +12,7 @@ export default function authorization(request, response, next) {
     return;
   }
 
-  jwt.verify(token, process.env.API_SECRET_KEY, (error, decoded) => {
+  jwt.verify(token, process.env.API_KEY, (error, decoded) => {
     if (error) {
       response.status(401).json({
         success: false,

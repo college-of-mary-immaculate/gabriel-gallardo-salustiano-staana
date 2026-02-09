@@ -1,7 +1,5 @@
 import styles from "./component.module.css";
-import { initPasswordToggle } from "./event.js";
 import eye from "../../assets/icons/hide.png";
-import eyeOff from "../../assets/icons/visible.png";
 
 export default function Confirmation(root) {
   root.innerHTML = `
@@ -62,7 +60,7 @@ export default function Confirmation(root) {
                         <div class="${styles["password-wrapper"]}">
                             <input
                             type="password"
-                            id="password"
+                            id="confirm-password"
                             class="${styles["password-field"]}"
                             />
 
@@ -89,5 +87,4 @@ export default function Confirmation(root) {
   `;
 
   root.className = styles["main"];
-  initPasswordToggle(eye, eyeOff);
 }

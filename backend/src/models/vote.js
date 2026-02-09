@@ -11,10 +11,13 @@ class Vote {
     try {
       const [existing] = await this.slaveDB.execute("SELECT * FROM Vote WHERE candidateId=? AND userId=?", [candidateId, userId]);
       if (existing.length > 0) throw new Error("Already voted for this candidate.");
-      const [results] = await this.masterDB.execute("INSERT INTO Vote (candidateId, userId) VALUES (?, ?)", [candidateId, userId]);
+      const [results] = await this.masterDB.execute("INSERT INTO Vote (candidateId, userId) VALUES (?, ?)", [
+        candidateId,
+        userId,
+      ]);
       return results;
     } catch (error) {
-      console.error("<e> vote.create", error);
+      console.error("<error> vote.create", error);
       throw error;
     }
   }
@@ -27,7 +30,10 @@ class Vote {
 
       const candidateIds = votes.map((v) => v.candidateId);
       const placeholders = candidateIds.map(() => "?").join(",");
-      const [existing] = await connection.execute(`SELECT candidateId FROM Vote WHERE userId=? AND candidateId IN (${placeholders})`, [userId, ...candidateIds]);
+      const [existing] = await connection.execute(
+        `SELECT candidateId FROM Vote WHERE userId=? AND candidateId IN (${placeholders})`,
+        [userId, ...candidateIds],
+      );
 
       if (existing.length > 0) {
         throw new Error(`Already voted for some candidates`);
@@ -40,7 +46,7 @@ class Vote {
       await connection.commit();
       return { affectedRows: votes.length };
     } catch (error) {
-      console.error("<e> vote.createBatch", error);
+      console.error("<error> vote.createBatch", error);
       await connection.rollback();
       throw error;
     } finally {
@@ -48,68 +54,22 @@ class Vote {
     }
   }
 
-  async tally(electionId) {
+  async getVoteCounts(electionId) {
     try {
       const [results] = await this.slaveDB.execute(
-        `SELECT 
-          cand.positionId, v.candidateId, COUNT(*) as voteCount, cand.fullname as candidateName, p.name as positionName
+        `SELECT v.candidateId, COUNT(*) as voteCount
         FROM Vote v
-        INNER JOIN Candidate cand ON cand.candidateId = v.candidateId
-        INNER JOIN Position p ON p.positionId = cand.positionId
-        WHERE p.electionId = ?
-        GROUP BY cand.positionId, v.candidateId
-        ORDER BY cand.positionId, voteCount DESC`,
+        INNER JOIN Candidate c ON c.candidateId = v.candidateId
+        WHERE c.electionId = ?
+        GROUP BY v.candidateId`,
         [electionId],
       );
-      const [totals] = await this.slaveDB.execute(
-        `SELECT cand.positionId, COUNT(*) as totalVotes
-        FROM Vote v
-        INNER JOIN Candidate cand ON cand.candidateId = v.candidateId
-        INNER JOIN Position p ON p.positionId = cand.positionId
-        WHERE p.electionId = ?
-        GROUP BY cand.positionId`,
-        [electionId],
-      );
-      const totalsByPosition = Object.fromEntries(totals.map((t) => [t.positionId, t.totalVotes]));
       return results.map((row) => ({
-        ...row,
+        candidateId: row.candidateId,
         voteCount: Number(row.voteCount),
-        votePercentage: totalsByPosition[row.positionId] > 0 ? (row.voteCount / totalsByPosition[row.positionId]) * 100 : 0,
       }));
     } catch (error) {
-      console.error("<e> vote.tally", error);
-      throw error;
-    }
-  }
-
-  async getByCandidate(electionId, candidateId) {
-    try {
-      const [result] = await this.slaveDB.execute(
-        `SELECT 
-          cand.positionId, v.candidateId, COUNT(*) as voteCount, cand.fullname as candidateName, p.name as positionName
-        FROM Vote v
-        INNER JOIN Candidate cand ON cand.candidateId = v.candidateId
-        INNER JOIN Position p ON p.positionId = cand.positionId
-        WHERE p.electionId = ? AND v.candidateId = ?
-        GROUP BY cand.positionId, v.candidateId
-        ORDER BY voteCount DESC`,
-        [electionId, candidateId],
-      );
-      if (!result.length) return null;
-      const [total] = await this.slaveDB.execute(
-        `SELECT COUNT(*) as totalVotes 
-        FROM Vote v
-        INNER JOIN Candidate cand ON cand.candidateId = v.candidateId
-        WHERE cand.positionId = ?`,
-        [result[0].positionId],
-      );
-      return {
-        ...result[0],
-        voteCount: Number(result[0].voteCount),
-        votePercentage: total[0].totalVotes > 0 ? (result[0].voteCount / total[0].totalVotes) * 100 : 0,
-      };
-    } catch (error) {
-      console.error("<e> vote.getByCandidate", error);
+      console.error("<error> vote.getVoteCounts", error);
       throw error;
     }
   }
@@ -119,22 +79,23 @@ class Vote {
       const [results] = await this.slaveDB.execute("SELECT * FROM Vote WHERE candidateId=? AND userId=?", [candidateId, userId]);
       return results.length > 0;
     } catch (error) {
-      console.error("<e> vote.hasVoted", error);
+      console.error("<error> vote.hasVoted", error);
       throw error;
     }
   }
 
-  async hasVotedForPosition(positionId, userId) {
+  async hasVotedInElection(electionId, userId) {
     try {
       const [results] = await this.slaveDB.execute(
-        `SELECT * FROM Vote v
-        INNER JOIN Candidate cand ON cand.candidateId = v.candidateId
-        WHERE cand.positionId = ? AND v.userId = ?`,
-        [positionId, userId],
+        `SELECT 1 FROM Vote v
+        INNER JOIN Candidate c ON c.candidateId = v.candidateId
+        WHERE c.electionId = ? AND v.userId = ?
+        LIMIT 1`,
+        [electionId, userId],
       );
       return results.length > 0;
     } catch (error) {
-      console.error("<e> vote.hasVotedForPosition", error);
+      console.error("<error> vote.hasVotedInElection", error);
       throw error;
     }
   }

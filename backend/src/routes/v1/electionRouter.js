@@ -8,10 +8,9 @@ const election = new ElectionController();
 
 electionRouter.use(authorization);
 
-electionRouter.get("/", election.get.bind(election));
-electionRouter.get("/history", election.getAll.bind(election));
+electionRouter.get("/", election.getCurrent.bind(election));
+electionRouter.get("/history", election.getHistory.bind(election));
 electionRouter.get("/lastElection", election.getLastElection.bind(election));
-electionRouter.get("/winners", election.getWinners.bind(election));
 electionRouter.post("/", election.create.bind(election));
 electionRouter.patch("/", election.end.bind(election));
 

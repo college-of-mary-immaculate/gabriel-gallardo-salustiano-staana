@@ -7,16 +7,18 @@ class Candidate {
     this.slaveDB = slaveConnection;
   }
 
-  async createBatch(positionId, candidates) {
+  async createBatch(electionId, position, candidates) {
     try {
       let affectedRows = 0;
+
       for (const cand of candidates) {
-        const [results] = await this.masterDB.execute("INSERT INTO Candidate (positionId, fullname, description, imageUrl) VALUES (?, ?, ?, ?)", [
-          positionId,
-          cand.fullname,
-          cand.description || "",
-          cand.imageUrl || "",
-        ]);
+        const [results] = await this.masterDB.execute(
+          `INSERT INTO Candidate
+         (electionId, position, fullname, description, imageUrl, isCurrent)
+         VALUES (?, ?, ?, ?, ?, ?)`,
+          [electionId, position, cand.fullname, cand.description || "", cand.imageUrl || "", cand.isCurrent ?? true],
+        );
+
         affectedRows += results.affectedRows;
       }
 
@@ -27,14 +29,14 @@ class Candidate {
     }
   }
 
-  async create(positionId, fullname, description, imageUrl) {
+  async create(electionId, position, fullname, description, imageUrl, isCurrent = true) {
     try {
-      const [results] = await this.masterDB.execute("INSERT INTO Candidate (positionId, fullname, description, imageUrl) VALUES (?, ?, ?, ?)", [
-        positionId,
-        fullname,
-        description || "",
-        imageUrl || "",
-      ]);
+      const [results] = await this.masterDB.execute(
+        `INSERT INTO Candidate
+       (electionId, position, fullname, description, imageUrl, isCurrent)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+        [electionId, position, fullname, description || "", imageUrl || "", isCurrent],
+      );
       return results;
     } catch (error) {
       console.error("<error> candidate.create", error);
@@ -42,12 +44,32 @@ class Candidate {
     }
   }
 
-  async getAllByPosition(positionId) {
+  async getCurrent() {
     try {
-      const [results] = await this.slaveDB.execute("SELECT * FROM Candidate WHERE positionId = ?", [positionId]);
+      const [results] = await this.slaveDB.execute(
+        `SELECT candidateId, electionId, position, fullname, description, imageUrl, isCurrent
+        FROM Candidate
+        WHERE isCurrent = ?`,
+        [true],
+      );
       return results;
     } catch (error) {
-      console.error("<error> candidate.getAllByPosition", error);
+      console.error("<error> candidate.getCurrent", error);
+      throw error;
+    }
+  }
+
+  async getByElection(electionId) {
+    try {
+      const [results] = await this.slaveDB.execute(
+        `SELECT candidateId, electionId, position, fullname, description, imageUrl, isCurrent
+        FROM Candidate
+        WHERE electionId = ?`,
+        [electionId],
+      );
+      return results;
+    } catch (error) {
+      console.error("<error> candidate.getByElection", error);
       throw error;
     }
   }
@@ -64,15 +86,26 @@ class Candidate {
 
   async update(candidateId, fullname, description, imageUrl) {
     try {
-      const [results] = await this.masterDB.execute("UPDATE Candidate SET fullname=?, description=?, imageUrl=? WHERE candidateId = ?", [
-        fullname,
-        description,
-        imageUrl,
-        candidateId,
-      ]);
+      const [results] = await this.masterDB.execute(
+        "UPDATE Candidate SET fullname=?, description=?, imageUrl=? WHERE candidateId = ?",
+        [fullname, description, imageUrl, candidateId],
+      );
       return results;
     } catch (error) {
       console.error("<error> candidate.update", error);
+      throw error;
+    }
+  }
+
+  async markNotCurrent(electionId) {
+    try {
+      const [results] = await this.masterDB.execute(
+        `UPDATE Candidate SET isCurrent = false WHERE electionId = ?`,
+        [electionId],
+      );
+      return results;
+    } catch (error) {
+      console.error("<error> candidate.markNotCurrent", error);
       throw error;
     }
   }

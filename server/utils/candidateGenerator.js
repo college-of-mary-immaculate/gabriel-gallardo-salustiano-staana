@@ -117,7 +117,34 @@ const filipinoLastNames = [
   "Yap",
 ];
 
-const middleInitials = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+const middleInitials = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
 
 const educationBackgrounds = [
   "Ateneo de Manila University - Political Science",
@@ -173,6 +200,33 @@ const advocacies = [
   "Climate Action",
 ];
 
+const candidateImages = [
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467979/candidate3_i5emow.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467978/candidate5_i3m6g3.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467977/candidate1_kzebyq.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467977/candidate2_cqb9ec.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467977/candidate4_zqrmz8.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467977/candidate10_tdpppt.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467977/candidate6_xwrltj.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467977/candidate9_chcv7g.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467976/candidate8_x9jewe.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467976/candidate7_oesfsx.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467976/candidate14_fqyfnj.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467976/candidate12_kr2jaf.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467976/candidate11_o5wrxj.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467975/candidate16_bkwpbj.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467975/candidate13_krnhrl.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467975/candidate15_qb4bvy.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1770467975/candidate17_gkjgb1.jpg",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1768321566/Rectangle_39_2_nj4cvn.png",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1768321566/Rectangle_39_1_ivzpoy.png",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1768321566/Rectangle_39_3_sn1toa.png",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1768321566/Rectangle_39_rhruv8.png",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1768321566/Rectangle_39_4_oye3yj.png",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1768321566/Rectangle_39_5_ggem1u.png",
+  "https://res.cloudinary.com/hamsters-api/image/upload/v1767584015/v8_cdshyj.avif",
+];
+
 function getRandomElement(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
@@ -197,14 +251,18 @@ function generateDescription() {
   const primaryAdvocacy = getRandomElement(advocacies);
   const secondaryAdvocacy = getRandomElement(advocacies.filter((a) => a !== primaryAdvocacy));
 
-  return `${background} with ${yearsExperience} years of experience. ` + `${education}. ` + `Primary focus: ${primaryAdvocacy}. Also advocates for ${secondaryAdvocacy}.`;
+  return (
+    `${background} with ${yearsExperience} years of experience. ` +
+    `${education}. ` +
+    `Primary focus: ${primaryAdvocacy}. Also advocates for ${secondaryAdvocacy}.`
+  );
 }
 
 export function generateCandidate(position) {
   return {
     fullname: generateFullName(),
     description: generateDescription(),
-    imageUrl: "",
+    imageUrl: getRandomElement(candidateImages),
   };
 }
 

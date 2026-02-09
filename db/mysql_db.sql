@@ -3,7 +3,6 @@ SET foreign_key_checks = 0;
 
 DROP TABLE IF EXISTS `Users`;
 DROP TABLE IF EXISTS `Election`;
-DROP TABLE IF EXISTS `Position`;
 DROP TABLE IF EXISTS `Candidate`;
 DROP TABLE IF EXISTS `Vote`;
 DROP TABLE IF EXISTS `Otp`;
@@ -37,32 +36,21 @@ CREATE TABLE `Election` (
     PRIMARY KEY (`electionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- POSITION (president, vice president...)
-DROP TABLE IF EXISTS `Position`;
-CREATE TABLE `Position` (
-    `positionId` INT AUTO_INCREMENT,
-    `electionId` INT NOT NULL,
-    `name` VARCHAR(80) NOT NULL,
-    `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-
-    PRIMARY KEY (`positionId`),
-    FOREIGN KEY (electionId) REFERENCES `Election`(electionId) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- CANDIDATES (pre-generated, random/seeds)
 DROP TABLE IF EXISTS `Candidate`;
 CREATE TABLE `Candidate` (
     `candidateId` INT AUTO_INCREMENT,
-    `positionId` INT NOT NULL,
+    `electionId` INT NOT NULL,
+    `position` ENUM('President','Vice President','Senator','Party-List') NOT NULL,
     `fullname` VARCHAR(80) NOT NULL,
     `description` TEXT,
     `imageUrl` VARCHAR(255),
+    `isCurrent` BOOLEAN,
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     PRIMARY KEY (`candidateId`),
-    FOREIGN KEY (positionId) REFERENCES `Position`(positionId) ON DELETE CASCADE
+    FOREIGN KEY (electionId) REFERENCES `Election`(electionId) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- USER VOTES
