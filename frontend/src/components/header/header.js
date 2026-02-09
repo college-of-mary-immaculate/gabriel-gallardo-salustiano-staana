@@ -8,7 +8,14 @@ export default function Header(root) {
           <a href="/" class="${styles["logo-link"]}">
             <h2 class="${styles["logo-text"]}">VOTE PH</h2>
           </a>
-        </div>  
+        </div>
+
+        <nav class="${styles["header-nav"]}">
+          <ul class="${styles["nav-list"]}">
+            <li><a href="/vote" class="${styles["nav-link"]}">Vote</a></li>
+            <li><a href="/winners" class="${styles["nav-link"]}">Winners</a></li>
+          </ul>
+        </nav>
 
         <div class="${styles["header-actions"]}">
           <button class="${styles["btn-profile"]}" id="profileBtn">

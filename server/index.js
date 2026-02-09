@@ -8,11 +8,13 @@ import { Server } from "socket.io";
 import { io as Client } from "socket.io-client";
 import { jwtDecode } from "jwt-decode";
 
-import { getWinners, getActiveElection } from "./utils/election.js";
+import { getActiveElection, getElectionHistory } from "./api/election.js";
 import { getOrCreateElection, markElectionEnd } from "./utils/electionManager.js";
 import { initializeElectionCandidates } from "./utils/candidateManager.js";
 import { calculateCountdown } from "./utils/countdown.js";
-import { fetchTally } from "./utils/vote.js";
+import { getVoteCounts, hasVotedInElection } from "./api/vote.js";
+import { getCurrentCandidates, getCandidatesByElection } from "./api/candidate.js";
+import { computeLeaderboard, computeWinners } from "./utils/tallyComputer.js";
 
 const app = express();
 const server = createServer(app);
@@ -28,13 +30,11 @@ const io = new Server(server, {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 if (process.env.CONTAINERIZED === "true") {
-  // In container: serve from /dist
   app.use(express.static(join(__dirname, "dist")));
   app.get("*all", (request, response) => {
     response.sendFile(join(__dirname, "dist/index.html"));
   });
 } else {
-  // In development: serve from ../dist
   app.use(express.static(join(__dirname, "../dist")));
   app.get("*all", async (request, response) => {
     response.sendFile(join(__dirname, "../dist/index.html"));
@@ -48,10 +48,7 @@ const portsLists = process.env.PORTS.split(",").map((url) => {
 
 try {
   let isConnectedToPublisher = false;
-  let votes = {};
   let activeVoters = [];
-  let currentElection = null;
-  let currentCandidates = null;
   let electionEnded = false;
 
   io.on("connection", (socket) => {
@@ -80,10 +77,13 @@ try {
         const election = await getActiveElection();
         socket.emit("electionData", election);
 
-        // Also send current tally if election exists
         if (election) {
-          const tally = await fetchTally(election.electionId);
-          socket.emit("tallyUpdate", tally);
+          const candidates = await getCurrentCandidates();
+          socket.emit("candidatesUpdate", candidates);
+
+          const voteCounts = await getVoteCounts(election.electionId);
+          const leaderboard = computeLeaderboard(voteCounts, candidates);
+          socket.emit("tallyUpdate", leaderboard);
         }
       } catch (error) {
         console.error("Error fetching election data:", error);
@@ -91,46 +91,58 @@ try {
       }
     });
 
-    socket.on("requestTally", async ({ electionId }) => {
+    socket.on("requestPastElections", async () => {
       try {
-        const tally = await fetchTally(electionId);
-        socket.emit("tallyUpdate", tally);
+        const pastElections = await getElectionHistory();
+        socket.emit("pastElections", pastElections);
       } catch (error) {
-        console.error("Error fetching tally:", error);
-        socket.emit("tallyError", { message: "Failed to fetch tally" });
+        console.error("Error fetching past elections:", error);
+        socket.emit("electionError", { message: "Failed to fetch past elections" });
       }
     });
 
-    socket.on("requestWinners", async ({ electionId }) => {
+    socket.on("requestElectionWinners", async ({ electionId }) => {
       try {
-        const winners = await getWinners(electionId);
-        socket.emit("winnersUpdate", { electionId, winners });
+        const candidates = await getCandidatesByElection(electionId);
+        const voteCounts = await getVoteCounts(electionId);
+        const winners = computeWinners(voteCounts, candidates);
+        socket.emit("electionWinners", { electionId, winners });
       } catch (error) {
-        console.error("Error fetching winners:", error);
-        socket.emit("winnersError", { message: "Failed to fetch winners" });
+        console.error("Error computing winners:", error);
+        socket.emit("winnersError", { message: "Failed to compute winners" });
+      }
+    });
+
+    socket.on("checkVoteStatus", async ({ electionId, userEmail }) => {
+      try {
+        const voted = await hasVotedInElection(electionId, userEmail);
+        socket.emit("voteStatusResult", { electionId, voted });
+      } catch (error) {
+        console.error("Error checking vote status:", error);
+        socket.emit("voteStatusResult", { electionId, voted: false });
       }
     });
 
     socket.on("voteSubmitted", async ({ electionId }) => {
       try {
-        const tally = await fetchTally(electionId);
+        const candidates = await getCurrentCandidates();
+        const voteCounts = await getVoteCounts(electionId);
+        const leaderboard = computeLeaderboard(voteCounts, candidates);
 
         if (process.env.PUBLISHER === "true") {
-          io.emit("tallyUpdate", tally);
+          io.emit("tallyUpdate", leaderboard);
         } else {
           if (typeof subscriberSocket !== "undefined" && subscriberSocket?.connected) {
-            subscriberSocket.emit("voted", { electionId, tally });
+            subscriberSocket.emit("voted", { electionId, tally: leaderboard });
           }
 
-          // Also update own clients
-          io.emit("tallyUpdate", tally);
+          io.emit("tallyUpdate", leaderboard);
         }
       } catch (error) {
         console.error("Error broadcasting tally:", error);
       }
     });
 
-    // handle discovery requests (for subscriber instances)
     socket.on("discovery", () => {
       if (process.env.PUBLISHER === "true") {
         const publisherAddress = `ws://${process.env.SERVER_NAME}:${process.env.PORT}`;
@@ -154,8 +166,8 @@ try {
   if (process.env.PUBLISHER === "true") {
     console.log("🔴 Running as PUBLISHER");
     try {
-      currentElection = await getOrCreateElection();
-      currentCandidates = await initializeElectionCandidates(currentElection.electionId);
+      const election = await getOrCreateElection();
+      await initializeElectionCandidates(election.electionId);
     } catch (error) {
       console.error("Failed to initialize election or candidates:", error);
     }
@@ -165,10 +177,12 @@ try {
         const election = await getActiveElection();
 
         if (election) {
-          const tally = await fetchTally(election.electionId);
+          const candidates = await getCurrentCandidates();
+          const voteCounts = await getVoteCounts(election.electionId);
+          const leaderboard = computeLeaderboard(voteCounts, candidates);
           const countdown = calculateCountdown(new Date(election.endTime));
 
-          io.emit("tallyUpdate", tally);
+          io.emit("tallyUpdate", leaderboard);
           io.emit("electionData", election);
           io.emit("electionCountdown", {
             electionId: election.electionId,
@@ -181,7 +195,7 @@ try {
 
           if (countdown.ended && !electionEnded) {
             electionEnded = true;
-            const winners = await getWinners(election.electionId);
+            const winners = computeWinners(voteCounts, candidates);
 
             io.emit("electionEnded", {
               electionId: election.electionId,
@@ -194,7 +208,6 @@ try {
             });
 
             activeVoters = [];
-            votes = {};
 
             await markElectionEnd(election.electionId);
 
@@ -246,8 +259,16 @@ try {
               io.emit("tallyUpdate", data);
             });
 
+            subscriberSocket.on("electionCountdown", (data) => {
+              io.emit("electionCountdown", data);
+            });
+
             subscriberSocket.on("electionData", (data) => {
               io.emit("electionData", data);
+            });
+
+            subscriberSocket.on("candidatesUpdate", (data) => {
+              io.emit("candidatesUpdate", data);
             });
 
             subscriberSocket.on("electionEnded", (data) => {
@@ -279,10 +300,6 @@ try {
             });
           }
         });
-
-        // messengerSocket.on("connect_error", (error) => {
-        //   // Silent fail for discovery - not all servers are publishers
-        // });
       }
     });
   }

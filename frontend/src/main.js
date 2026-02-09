@@ -27,7 +27,6 @@ app.add("/vote", VotePage);
 app.add("/confirmation", ConfirmationPage);
 app.add("/receipt", ReceiptPage);
 app.add("/winners", WinnerPage);
-app.add("/leaderboard", LeaderboardPage);
-app.handleRouteChanges();
+app.add("/leaderboards", LeaderboardPage);
 
 app.handleRouteChanges();

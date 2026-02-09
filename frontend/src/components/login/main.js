@@ -1,7 +1,5 @@
 import styles from "./component.module.css";
-import { initPasswordToggle } from "./event.js";
-import eye from "../../assets/icons/hide.png";
-import eyeOff from "../../assets/icons/visible.png";
+import eyeOpen from "../../assets/icons/eye-open.svg";
 
 export default function Main(root) {
   root.innerHTML = `
@@ -12,14 +10,14 @@ export default function Main(root) {
         </div> 
         <div class="${styles["login-form-container"]}">
             <div class="${styles["label-voting"]}">
-                <h2 class="${styles["label-voting-h2"]}">Welcome to Title</h2>
+                <h2 class="${styles["label-voting-h2"]}">Welcome to VotePH</h2>
                 <h3 class="${styles["label-voting-h3"]}">Please login using the form below</h3>
             </div>
 
             <div class="${styles["user-input"]}">
                 <div class="${styles["id-input"]}">
                     <p class="${styles["email-input-p"]}">Email</p>
-                    <input type="number" class="${styles["id-field"]}">
+                    <input type="email" id="identifier" class="${styles["id-field"]}">
                 </div>
 
                 <div class="${styles["password-input"]}">
@@ -40,7 +38,7 @@ export default function Main(root) {
                         >
                         <img
                             id="eyeIcon"
-                            src="${eye}"
+                            src="${eyeOpen}"
                             alt="Show password"
                         />
                         </button>
@@ -49,12 +47,11 @@ export default function Main(root) {
 
             </div>
 
-            <button class="${styles["login-btn"]}">Login</button>
+            <button id="login-btn" class="${styles["login-btn"]}">Login</button>
             <h3>Don't have an account? <a href="#">Sign up</a></h3>
         </div>
     </div>
   `;
 
-  initPasswordToggle(eye, eyeOff);
   //    root.className = styles['main'];
 }

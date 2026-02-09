@@ -1,15 +1,17 @@
 // backend/src/controllers/v1/voteController.js
 import Vote from "../../models/vote.js";
+import User from "../../models/user.js";
 
 class VoteController {
   constructor() {
     this.vote = new Vote();
+    this.user = new User();
   }
 
   async create(request, response) {
     try {
-      const { electionId, positionId, candidateId, userId } = request.body || {};
-      await this.vote.create(electionId, positionId, candidateId, userId);
+      const { candidateId, userId } = request.body || {};
+      await this.vote.create(candidateId, userId);
       response.status(200).json({
         success: true,
         message: "Voted successfully.",
@@ -22,28 +24,35 @@ class VoteController {
     }
   }
 
-  // expects: { electionId, userId, votes: [{ positionId, candidateId }, ...] }
   async createBatch(request, response) {
     try {
-      const { electionId, userId, votes } = request.body || {};
+      const { userEmail, votes } = request.body || {};
 
-      // Validation
-      if (!electionId || !userId || !Array.isArray(votes) || votes.length === 0) {
+      if (!userEmail || !Array.isArray(votes) || votes.length === 0) {
         return response.status(400).json({
           success: false,
-          message: "Invalid request. Provide electionId, userId, and votes array.",
+          message: "Invalid request. Provide userEmail and votes array.",
         });
       }
 
-      const invalidVote = votes.find((v) => !v.positionId || !v.candidateId);
+      const invalidVote = votes.find((v) => !v.candidateId);
       if (invalidVote) {
         return response.status(400).json({
           success: false,
-          message: "Each vote must have positionId and candidateId.",
+          message: "Each vote must have candidateId.",
         });
       }
 
-      await this.vote.createBatch(electionId, userId, votes);
+      const user = await this.user.get(userEmail);
+
+      if (!user) {
+        return response.status(404).json({
+          success: false,
+          message: "User not found.",
+        });
+      }
+
+      await this.vote.createBatch(user.userId, votes);
 
       response.status(200).json({
         success: true,
@@ -57,34 +66,13 @@ class VoteController {
     }
   }
 
-  async get(request, response) {
-    try {
-      const { electionId, candidateId } = request.query;
-      const result = await this.vote.getByCandidate(electionId, candidateId);
-      if (!result)
-        return response.status(404).json({
-          success: false,
-          message: "No votes for candidate or candidate not found.",
-        });
-      response.status(200).json({
-        success: true,
-        data: result,
-      });
-    } catch (error) {
-      response.status(500).json({
-        success: false,
-        message: error.message,
-      });
-    }
-  }
-
-  async getAll(request, response) {
+  async getVoteCounts(request, response) {
     try {
       const { electionId } = request.query;
-      const tally = await this.vote.tally(electionId);
+      const voteCounts = await this.vote.getVoteCounts(electionId);
       response.status(200).json({
         success: true,
-        tally,
+        voteCounts,
       });
     } catch (error) {
       response.status(500).json({
@@ -96,8 +84,8 @@ class VoteController {
 
   async hasVoted(request, response) {
     try {
-      const { electionId, positionId, userId } = request.query;
-      const voted = await this.vote.hasVoted(electionId, positionId, userId);
+      const { candidateId, userId } = request.query;
+      const voted = await this.vote.hasVoted(candidateId, userId);
       response.status(200).json({
         success: true,
         voted,
@@ -110,11 +98,27 @@ class VoteController {
     }
   }
 
-  async hasVotedAll(request, response) {
+  async hasVotedInElection(request, response) {
     try {
-      const { electionId, userId } = request.query;
-      const voted = await this.vote.hasVotedInElection(electionId, userId);
+      const { electionId, userEmail } = request.query;
 
+      if (!electionId || !userEmail) {
+        return response.status(400).json({
+          success: false,
+          message: "electionId and userEmail are required.",
+        });
+      }
+
+      const user = await this.user.get(userEmail);
+
+      if (!user) {
+        return response.status(404).json({
+          success: false,
+          message: "User not found.",
+        });
+      }
+
+      const voted = await this.vote.hasVotedInElection(electionId, user.userId);
       response.status(200).json({
         success: true,
         voted,

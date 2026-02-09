@@ -8,8 +8,7 @@ class CandidateController {
 
   async createBulk(request, response) {
     try {
-      // candidates expects = [{ fullname, description, imageUrl }, ...]
-      const { positionId, candidates } = request.body || {};
+      const { electionId, position, candidates } = request.body || {};
 
       if (!Array.isArray(candidates) || candidates.length === 0) {
         return response.status(400).json({
@@ -18,12 +17,13 @@ class CandidateController {
         });
       }
 
-      const results = await this.candidate.createBatch(positionId, candidates);
+      const results = await this.candidate.createBatch(electionId, position, candidates);
 
       response.status(201).json({
         success: true,
         created: results.affectedRows,
-        positionId,
+        electionId,
+        position,
       });
     } catch (error) {
       response.status(500).json({
@@ -35,8 +35,8 @@ class CandidateController {
 
   async create(request, response) {
     try {
-      const { positionId, fullname, description = "", imageUrl = "" } = request.body || {};
-      const result = await this.candidate.create(positionId, fullname, description, imageUrl);
+      const { electionId, position, fullname, description = "", imageUrl = "" } = request.body || {};
+      const result = await this.candidate.create(electionId, position, fullname, description, imageUrl);
       response.status(201).json({
         success: true,
         candidateId: result.insertId,
@@ -65,10 +65,25 @@ class CandidateController {
     }
   }
 
-  async getAll(request, response) {
+  async getCurrent(request, response) {
     try {
-      const { positionId } = request.query;
-      const results = await this.candidate.getAllByPosition(positionId);
+      const results = await this.candidate.getCurrent();
+      response.status(200).json({
+        success: true,
+        results,
+      });
+    } catch (error) {
+      response.status(500).json({
+        success: false,
+        message: error.toString(),
+      });
+    }
+  }
+
+  async getByElection(request, response) {
+    try {
+      const { electionId } = request.params;
+      const results = await this.candidate.getByElection(electionId);
       response.status(200).json({
         success: true,
         results,
@@ -88,6 +103,23 @@ class CandidateController {
       response.status(200).json({
         success: true,
         result,
+      });
+    } catch (error) {
+      response.status(500).json({
+        success: false,
+        message: error.toString(),
+      });
+    }
+  }
+
+  async markNotCurrent(request, response) {
+    try {
+      const { electionId } = request.params;
+      const result = await this.candidate.markNotCurrent(electionId);
+      response.status(200).json({
+        success: true,
+        result,
+        affectedRows: result.affectedRows,
       });
     } catch (error) {
       response.status(500).json({

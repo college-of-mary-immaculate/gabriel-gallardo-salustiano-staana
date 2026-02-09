@@ -1,5 +1,6 @@
 import Layout from "../layouts/default.js";
 import Main from "../components/signup/main.js";
+import Events from "../components/signup/event.js";
 
 export default function SignPage() {
   const { main } = Layout(this.root);

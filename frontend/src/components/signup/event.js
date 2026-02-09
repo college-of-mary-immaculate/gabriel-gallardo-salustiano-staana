@@ -1,21 +1,49 @@
-export function initPasswordToggle(eyeIcon, eyeOffIcon) {
-  const passwordInput = document.getElementById("password");
-  const toggleBtn = document.getElementById("togglePassword");
-  const icon = document.getElementById("eyeIcon");
+import { ping } from "../../utils/home";
+import { isTokenExpired } from "../../utils/authentication";
+import { register } from "../../utils/account";
+import eyeOpen from "../../assets/icons/eye-open.svg";
+import eyeClosed from "../../assets/icons/eye-closed.svg";
 
-  if (!passwordInput || !toggleBtn || !icon) return;
+export default async function Events() {
+  console.log("Register Page Event");
 
-  toggleBtn.addEventListener("click", () => {
-    const isHidden = passwordInput.type === "password";
+  window.addEventListener("load", async function () {
+    try {
+      await ping();
+      document.getElementById("under-maintenance").style.display = "none";
+      document.getElementById("app").style.display = "block";
+    } catch (error) {
+      document.getElementById("under-maintenance").style.display = "block";
+      document.getElementById("app").style.display = "none";
+      return;
+    }
 
-    passwordInput.type = isHidden ? "text" : "password";
+    if (localStorage.getItem("token")) {
+      const isExpired = isTokenExpired(localStorage.getItem("token"));
+      if (isExpired) {
+        localStorage.removeItem("token");
+      } else {
+        window.app.pushRoute("/leaderboards");
+        return;
+      }
+    }
 
-    icon.src = isHidden ? eyeOffIcon : eyeIcon;
-    icon.alt = isHidden ? "Hide password" : "Show password";
-
-    toggleBtn.setAttribute(
-      "aria-label",
-      isHidden ? "Hide password" : "Show password",
-    );
+    // attachRegisterFormEvents();
+    // attachPasswordToggleEvents();
   });
 }
+
+// function attachRegisterFormEvents() {
+
+// }
+
+// async function handRegister() {
+//   try {
+//   } catch (error) {
+//     console.error("Register Error", error);
+//   }
+// }
+
+// function attachPasswordToggleEvents() {
+
+// }

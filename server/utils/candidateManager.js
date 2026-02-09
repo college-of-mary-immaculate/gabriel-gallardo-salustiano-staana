@@ -1,14 +1,23 @@
 // server/utils/candidateManager.js
 import { generateElectionCandidates } from "./candidateGenerator.js";
-import { createBulkCandidate } from "./candidate.js";
-import { initializePositions } from "./positionManager.js";
+import { createBulkCandidate, getCurrentCandidates } from "../api/candidate.js";
 
 export async function initializeElectionCandidates(electionId) {
   try {
-    // Step 1: Create positions
-    const positionMap = await initializePositions(electionId);
+    const existingCandidates = await getCurrentCandidates();
 
-    // Step 2: Generate candidates
+    if (existingCandidates && existingCandidates.length > 0) {
+      console.log(`Election ${electionId} already has ${existingCandidates.length} candidates, skipping initialization`);
+      return {
+        electionId,
+        totalCreated: 0,
+        skipped: true,
+        existingCount: existingCandidates.length,
+      };
+    }
+
+    console.log(`Creating candidates for new election ${electionId}...`);
+
     const candidateConfig = {
       presidents: 5,
       vicePresidents: 5,
@@ -18,7 +27,6 @@ export async function initializeElectionCandidates(electionId) {
 
     const candidates = generateElectionCandidates(candidateConfig);
 
-    // Step 3: Create candidates in database
     const candidatesByPosition = {
       President: candidates.presidents,
       "Vice President": candidates.vicePresidents,
@@ -28,13 +36,13 @@ export async function initializeElectionCandidates(electionId) {
 
     let totalCreated = 0;
 
-    for (const [positionName, candidateList] of Object.entries(candidatesByPosition)) {
-      const positionId = positionMap[positionName];
-      await createBulkCandidate(positionId, candidateList);
+    for (const [position, candidateList] of Object.entries(candidatesByPosition)) {
+      await createBulkCandidate(electionId, position, candidateList);
       totalCreated += candidateList.length;
     }
 
-    return { electionId, positionMap, totalCreated };
+    console.log(`Created ${totalCreated} candidates for election ${electionId}`);
+    return { electionId, totalCreated };
   } catch (error) {
     console.error("Error initializing candidates:", error);
     throw error;

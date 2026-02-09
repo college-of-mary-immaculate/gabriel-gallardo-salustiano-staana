@@ -17,31 +17,28 @@ class AccountController {
       const { email, fullname, password, verifyPassword } = request.body || {};
 
       if (password != verifyPassword) {
-        response.status(400).json({
+        return response.status(400).json({
           success: false,
           message: "Password doesn't match.",
         });
-        return;
       }
 
-      const result = await this.user.create(fullname, email, password);
+      const result = await this.user.create(email, fullname, password);
 
       response.status(201).json({
         success: true,
         data: {
           userId: result?.insertId,
-          token: jwt.sign({ email: email, vin: result.vin }, process.env.API_SECRET_KEY, {
+          token: jwt.sign({ email: email, vin: result.vin }, process.env.API_KEY, {
             expiresIn: "1d",
           }),
         },
       });
-      response.end();
     } catch (error) {
       response.status(500).json({
         success: false,
         message: error.toString(),
       });
-      response.end();
     }
   }
 
@@ -66,20 +63,18 @@ class AccountController {
               email: user.email,
               vin: user.vin,
             },
-            process.env.API_SECRET_KEY,
+            process.env.API_KEY,
             {
               expiresIn: "1d",
             },
           ),
         },
       });
-      response.end();
     } catch (error) {
       response.status(500).json({
         success: false,
         message: error.toString(),
       });
-      response.end();
     }
   }
 
@@ -93,13 +88,11 @@ class AccountController {
           ...userDetails,
         },
       });
-      response.end();
     } catch (error) {
       response.status(500).json({
         success: false,
         message: error.toString(),
       });
-      response.end();
     }
   }
 
@@ -124,7 +117,7 @@ class AccountController {
                 email: upEmail,
                 vin: result.vin,
               },
-              process.env.API_SECRET_KEY,
+              process.env.API_KEY,
               { expiresIn: "1d" },
             ),
           },
@@ -168,7 +161,14 @@ class AccountController {
 
       const emailResult = null;
       if (process.env.ENV === "production") {
-        emailResult = await sendMail(`${sender_name} Support`, process.env.GOOGLE_USER, user.email, "Password Reset Request", `Your OTP is: ${plainOTP}`, emailHTML);
+        emailResult = await sendMail(
+          `${sender_name} Support`,
+          process.env.GOOGLE_USER,
+          user.email,
+          "Password Reset Request",
+          `Your OTP is: ${plainOTP}`,
+          emailHTML,
+        );
       }
 
       return response.status(200).json({

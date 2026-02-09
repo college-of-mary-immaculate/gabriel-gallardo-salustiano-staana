@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: #E8EAED;
+  background-color: #e8eaed;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   height: 64px;
@@ -22,7 +22,7 @@
 }
 
 /* Logo */
-.header-logo a {
+.logo-link {
   text-decoration: none;
   color: #333;
 }
@@ -44,6 +44,7 @@
   margin: 0;
   padding: 0;
   display: flex;
+  justify-content: end;
   gap: 32px;
 }
 
@@ -61,7 +62,7 @@
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -8px;
   left: 0;
@@ -128,11 +129,11 @@ body.login-page {
   .header-nav {
     display: none;
   }
-  
+
   .header-container {
     padding: 0 16px;
   }
-  
+
   .nav-list {
     gap: 16px;
   }

@@ -1,5 +1,6 @@
 // server/utils/electionManager.js
-import { getLastElection, createElection, getActiveElection, endElection } from "./election.js";
+import { getLastElection, createElection, getActiveElection, endElection } from "../api/election.js";
+import { markCandidatesNotCurrent } from "../api/candidate.js";
 
 function formatDateForMySQL(date, { withSeconds = true } = {}) {
   const year = date.getFullYear();
@@ -26,7 +27,8 @@ export async function getOrCreateElection() {
     }
 
     const now = new Date();
-    const endTime = new Date(now.getTime() + 60 * 1000);
+    // const endTime = new Date(now.getTime() + 60 * 1000);
+    const endTime = new Date(now.getTime() + 60 * 60 * 1000);
 
     const newElectionName = `Election – ${formatDateForMySQL(now, { withSeconds: false })}`;
     const startTimeFormatted = formatDateForMySQL(now);
@@ -44,6 +46,7 @@ export async function getOrCreateElection() {
 export async function markElectionEnd(electionId) {
   try {
     await endElection(electionId);
+    await markCandidatesNotCurrent(electionId);
     const newElection = await getOrCreateElection();
     return newElection;
   } catch (error) {

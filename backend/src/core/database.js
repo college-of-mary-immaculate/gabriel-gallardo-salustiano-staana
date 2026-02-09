@@ -11,7 +11,7 @@ import mysql from "mysql2/promise";
 
 // export { connection };
 
-const masterConnection = await mysql.createConnection({
+const masterConnection = mysql.createPool({
   host: process.env.DB_MASTER_HOST,
   user: process.env.DB_MASTER_USER,
   password: process.env.DB_MASTER_PASSWORD,
@@ -19,7 +19,7 @@ const masterConnection = await mysql.createConnection({
   port: process.env.DB_MASTER_PORT || 3306,
 });
 
-const slaveConnection = await mysql.createConnection({
+const slaveConnection = mysql.createPool({
   host: process.env.DB_SLAVE_HOST,
   user: process.env.DB_SLAVE_USER,
   password: process.env.DB_SLAVE_PASSWORD,

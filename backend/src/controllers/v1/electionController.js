@@ -9,7 +9,6 @@ class ElectionController {
   async create(request, response) {
     try {
       const { title, startTime, endTime } = request.body || {};
-
       const result = await this.election.create(title, startTime, endTime);
 
       response.status(200).json({
@@ -24,13 +23,13 @@ class ElectionController {
     }
   }
 
-  async getAll(request, response) {
+  async getCurrent(request, response) {
     try {
-      const results = await this.election.getHistory();
+      const election = await this.election.getCurrent();
 
       response.status(200).json({
         success: true,
-        results,
+        election,
       });
     } catch (error) {
       response.status(500).json({
@@ -40,13 +39,13 @@ class ElectionController {
     }
   }
 
-  async get(request, response) {
+  async getHistory(request, response) {
     try {
-      const election = await this.election.getCurrent();
+      const results = await this.election.getHistory();
 
       response.status(200).json({
         success: true,
-        election,
+        results,
       });
     } catch (error) {
       response.status(500).json({
@@ -73,27 +72,9 @@ class ElectionController {
     }
   }
 
-  async getWinners(request, response) {
-    try {
-      const { electionId } = request.query;
-      const winners = await this.election.getWinners(electionId);
-
-      response.status(200).json({
-        success: true,
-        winners,
-      });
-    } catch (error) {
-      response.status(500).json({
-        success: false,
-        message: error.toString(),
-      });
-    }
-  }
-
   async end(request, response) {
     try {
       const { electionId } = request.body || {};
-
       const result = await this.election.end(electionId);
 
       response.status(200).json({
