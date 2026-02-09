@@ -6,6 +6,11 @@ A real-time online voting system built with Express, Socket.IO, and Vite. The ap
 
 ```
                         ┌──────────────┐
+                        │  User Client │
+                        └──────┬───────┘
+                               |
+                               ▼
+                        ┌──────────────┐
                         │   HAProxy    │ :80 (load balancer)
                         │  (roundrobin)│ :8404 (stats dashboard)
                         └──────┬───────┘
@@ -95,12 +100,13 @@ docker compose down && rm -rf ./master/data ./slave/data
 
 ## Local Development (without Docker)
 
-For development without Docker, you'll need Node.js 18+ and a local MySQL instance with `master` `slave` users.
+For development without Docker, you'll need Node.js 18+ and a local MySQL instance with `master` & `slave` users.
 
 1. Install dependencies:
 
    ```bash
    npm install
+   mysql -u root -p mydb < db/mysql_db.sql
    ```
 
 2. Configure environment VITE variables in `frontend/.env` && `.env` and set up your database connection.
@@ -108,8 +114,8 @@ For development without Docker, you'll need Node.js 18+ and a local MySQL instan
    ```bash
     ### DATABASE ###
     MASTER_DB_HOST=mysql_master
-    MASTER_DB_USER=mydb_user
-    MASTER_DB_PASS=mydb_pwd
+    MASTER_DB_USER=mydb_master_user
+    MASTER_DB_PASS=mydb_master_pwd
     MASTER_DB_NAME=mydb
     MASTER_DB_PORT=3306
 
