@@ -55,6 +55,54 @@ sudo usermod -aG docker $USER
 # Log out and log back in for group changes to take effect
 ```
 
+### Setup ENV file
+
+- Configure environment variables in `.env`.
+
+  ```bash
+   ### DATABASE ###
+   MASTER_DB_HOST=mysql_master
+   MASTER_DB_USER=mydb_master_user
+   MASTER_DB_PASS=mydb_master_pwd
+   MASTER_DB_NAME=mydb
+   MASTER_DB_PORT=3306
+
+   SLAVE_DB_HOST=mysql_slave
+   SLAVE_DB_USER=mydb_slave_user
+   SLAVE_DB_PASS=mydb_slave_pwd
+   SLAVE_DB_NAME=mydb
+   SLAVE_DB_PORT=3306
+
+   ### BACKEND ###
+   API_HOST=localhost
+   API_PORT=5000
+   API_KEY=voteph
+
+   ### FRONTEND ###
+   HOST=localhost
+   PORT=3000
+
+   ### SOCKET IO ###
+   SERVER_NAME=localhost
+   PORTS=localhost:3000,localhost:3001,localhost:3002
+
+   ### GOOGLE SECRET KEYS ### (OPTIONAL)
+   GOOGLE_USER=
+   GOOGLE_REDIRECT_URI=
+   GOOGLE_CLIENT_ID=
+   GOOGLE_CLIENT_SECRET=
+   GOOGLE_REFRESH_TOKEN=
+   GOOGLE_ACCESS_TOKEN=
+  ```
+
+- Configure environment VITE variables in `frontend/.env`.
+
+  ```bash
+     VITE_API_PORT=5000
+     VITE_API_HOST=localhost
+     VITE_API_KEY=voteph
+  ```
+
 ## Setup and Run
 
 1. **Clone the repository**
@@ -109,45 +157,7 @@ For development without Docker, you'll need Node.js 18+ and a local MySQL instan
    mysql -u root -p mydb < db/mysql_db.sql
    ```
 
-2. Configure environment VITE variables in `frontend/.env` && `.env` and set up your database connection.
-
-   ```bash
-    ### DATABASE ###
-    MASTER_DB_HOST=mysql_master
-    MASTER_DB_USER=mydb_master_user
-    MASTER_DB_PASS=mydb_master_pwd
-    MASTER_DB_NAME=mydb
-    MASTER_DB_PORT=3306
-
-    SLAVE_DB_HOST=mysql_slave
-    SLAVE_DB_USER=mydb_slave_user
-    SLAVE_DB_PASS=mydb_slave_pwd
-    SLAVE_DB_NAME=mydb
-    SLAVE_DB_PORT=3306
-
-    ### BACKEND ###
-    API_HOST=localhost
-    API_PORT=5000
-    API_KEY=voteph
-
-    ### FRONTEND ###
-    HOST=localhost
-    PORT=3000
-
-    ### SOCKET IO ###
-    SERVER_NAME=localhost
-    PORTS=localhost:3000,localhost:3001,localhost:3002
-
-    ### GOOGLE SECRET KEYS ### (OPTIONAL)
-    GOOGLE_USER=
-    GOOGLE_REDIRECT_URI=
-    GOOGLE_CLIENT_ID=
-    GOOGLE_CLIENT_SECRET=
-    GOOGLE_REFRESH_TOKEN=
-    GOOGLE_ACCESS_TOKEN=
-   ```
-
-3. Start all services:
+2. Start all services:
 
    ```bash
    npm run api

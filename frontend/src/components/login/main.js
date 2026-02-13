@@ -48,7 +48,7 @@ export default function Main(root) {
             </div>
 
             <button id="login-btn" class="${styles["login-btn"]}">Login</button>
-            <h3>Don't have an account? <a href="#">Sign up</a></h3>
+            <h3>Don't have an account? <a id="signup-link" href="#">Sign up</a></h3>
         </div>
     </div>
   `;
