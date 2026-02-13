@@ -30,6 +30,7 @@ export default async function Events() {
 
     attachLoginFormEvents();
     attachPasswordToggleEvents();
+    attachSignupLinkEvent();
   });
 }
 
@@ -104,6 +105,17 @@ async function handleLogin(identifierInput, passwordInput, loginBtn) {
     loginBtn.disabled = false;
     loginBtn.textContent = "Login";
   }
+}
+
+function attachSignupLinkEvent() {
+  const signupLink = document.getElementById("signup-link");
+
+  if (!signupLink) return;
+
+  signupLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    window.app.pushRoute("/signup");
+  });
 }
 
 function attachPasswordToggleEvents() {
