@@ -30,6 +30,7 @@ export default async function Events() {
   attachLoginFormEvents();
   attachPasswordToggleEvents();
   attachSignupLinkEvent();
+  attachBackHomeEvent();
 }
 
 function attachLoginFormEvents() {
@@ -58,7 +59,6 @@ function attachLoginFormEvents() {
   passwordInput.addEventListener("keypress", handleEnterKey);
 }
 
-// Extracted login logic for reuse
 async function handleLogin(identifierInput, passwordInput, loginBtn) {
   const identifier = identifierInput.value.trim();
   const password = passwordInput.value.trim();
@@ -131,9 +131,23 @@ function attachPasswordToggleEvents() {
 
     passwordInput.type = isPassword ? "text" : "password";
 
-    eyeIcon.src = isPassword ? eyeClosed : eyeOpen;
+    eyeIcon.src = isPassword ? eyeOpen : eyeClosed;
     eyeIcon.alt = isPassword ? "Hide password" : "Show password";
 
-    toggleBtn.setAttribute("aria-label", isPassword ? "Hide password" : "Show password");
+    toggleBtn.setAttribute(
+      "aria-label",
+      isPassword ? "Hide password" : "Show password",
+    );
+  });
+}
+
+function attachBackHomeEvent() {
+  const backHome = document.getElementById("back-home");
+
+  if (!backHome) return;
+
+  backHome.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.app.pushRoute("/");
   });
 }

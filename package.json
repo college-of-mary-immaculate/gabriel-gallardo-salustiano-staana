@@ -9,7 +9,7 @@
     "frontend": "vite",
     "dev:frontend": "concurrently --names \"socket,frontend\" --prefix-colors \"red,green\" \"npm run dev\" \"npm run frontend\"",
     "build": "vite build --emptyOutDir",
-    "start": "concurrently --names \"build,publisher,subscriber1,subscriber2\" --prefix-colors \"blue,red,magenta,yellow\" \"npm run build\" \"PUBLISHER=true PORT=3000 npm run dev\" \"PUBLISHER=false PORT=3001 npm run dev\" \"PUBLISHER=false PORT=3002 npm run dev\"",
+    "start": "concurrently --names \"build,publisher,subscriber1,subscriber2\" --prefix-colors \"blue,red,magenta,yellow\" \"npm run build\" \"cross-env PUBLISHER=true PORT=3000 npm run dev\" \"cross-env PUBLISHER=false PORT=3001 npm run dev\" \"cross-env PUBLISHER=false PORT=3002 npm run dev\"",
     "test": "echo \"Error: not test specified\" && exit 1"
   },
   "keywords": [],
@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
     "nodemon": "^3.1.11",
     "vite": "^7.2.4"
   }
