@@ -113,7 +113,7 @@
   width: 100%;
   max-width: 220px;
   margin: 0 auto;
-  height: fit-content;
+  height: 100%;
   background: var(--card-bg);
   border-radius: 10px;
   position: relative;
@@ -121,7 +121,9 @@
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: var(--card-shadow);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, sans-serif;
 }
 
 /* Status Badge */
@@ -208,7 +210,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
   animation: shimmer 2s infinite;
 }
 .card_total_votes {
@@ -229,6 +236,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 0.75em;
   position: relative;
   z-index: 2;
@@ -251,8 +259,18 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 30%),
-    repeating-linear-gradient(45deg, rgba(139, 92, 246, 0.1) 0px, rgba(139, 92, 246, 0.1) 2px, transparent 2px, transparent 4px);
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 30%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(139, 92, 246, 0.1) 0px,
+      rgba(139, 92, 246, 0.1) 2px,
+      transparent 2px,
+      transparent 4px
+    );
   opacity: 0.5;
 }
 
@@ -420,20 +438,17 @@
     padding: 0px;
   }
 
-  .card_content {
-    padding: 10px;
-  }
-
   .card_image {
     height: 100px;
   }
 
   .card_title {
-    font-size: medium;
+    font-size: small;
   }
 
   .card_content {
     gap: 0.5em;
+    padding: 10px;
   }
 
   .card_text {

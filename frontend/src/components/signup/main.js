@@ -3,10 +3,16 @@ import eyeOpen from "../../assets/icons/eye-open.svg";
 
 export default function Main(root) {
   root.innerHTML = `
+    <div> 
+        <a id="back-home" href="#" class="${styles["back-home"]}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5M12 5l-7 7 7 7"/>
+            </svg>
+            Back to home
+        </a>
        <div class="${styles["signup-form-body"]}">
-            <div class="${styles["logo-container"]}">
-                <!-- <img src="voting-logo.png" alt="voting-logo" class="logo"> -->
-                <h2 class="${styles["logo-container-h2"]}">VOTING SYSTEM LOGO</h2>
+            <div class="${styles["side-pic"]}">
+                 <img class="${styles["sign-up-logo"]}" src="https://res.cloudinary.com/dayv9oa8q/image/upload/v1767785318/PineTools.com_ballot-box-isolated-vector-41558112_1_wn5dij.png" alt="Ballot Box">
             </div>
             <div class="${styles["signup-form-container"]}">
                 <div class="${styles["label-account"]}">
@@ -14,14 +20,14 @@ export default function Main(root) {
                 </div>
 
                 <div class="${styles["user-input"]}">
-                    <div class="${styles["last-name-input"]}">
-                        <p class="${styles["last-name-input-p"]}">Last Name</p>
-                        <input type="text" id="last-name" class="${styles["last-name-field"]}">
-                    </div>
-
                     <div class="${styles["first-name-input"]}">
                         <p class="${styles["first-name-input-p"]}">First Name</p>
                         <input type="text" id="first-name" class="${styles["first-name-field"]}">
+                    </div>
+
+                    <div class="${styles["last-name-input"]}">
+                        <p class="${styles["last-name-input-p"]}">Last Name</p>
+                        <input type="text" id="last-name" class="${styles["last-name-field"]}">
                     </div>
 
                     <div class="${styles["email-input"]}">
@@ -83,6 +89,7 @@ export default function Main(root) {
                 <button id="signup-btn" class="${styles["create-acc-btn"]}">Sign Up</button>
                 <h3>Have already an account? <a id="login-link" href="#">Login</a></h3>
             </div>
+        </div>
     </div>
   `;
 

@@ -40,20 +40,41 @@ function attachRegisterFormEvents() {
   const passwordInput = document.getElementById("password");
   const confirmPasswordInput = document.getElementById("confirm-password");
 
-  if (!signupBtn || !lastNameInput || !firstNameInput || !emailInput || !passwordInput || !confirmPasswordInput) {
+  if (
+    !signupBtn ||
+    !lastNameInput ||
+    !firstNameInput ||
+    !emailInput ||
+    !passwordInput ||
+    !confirmPasswordInput
+  ) {
     console.error("Register form elements not found");
     return;
   }
 
   signupBtn.addEventListener("click", async (event) => {
     event.preventDefault();
-    await handleRegister(lastNameInput, firstNameInput, emailInput, passwordInput, confirmPasswordInput, signupBtn);
+    await handleRegister(
+      lastNameInput,
+      firstNameInput,
+      emailInput,
+      passwordInput,
+      confirmPasswordInput,
+      signupBtn,
+    );
   });
 
   const handleEnterKey = async (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      await handleRegister(lastNameInput, firstNameInput, emailInput, passwordInput, confirmPasswordInput, signupBtn);
+      await handleRegister(
+        lastNameInput,
+        firstNameInput,
+        emailInput,
+        passwordInput,
+        confirmPasswordInput,
+        signupBtn,
+      );
     }
   };
 
@@ -64,7 +85,14 @@ function attachRegisterFormEvents() {
   confirmPasswordInput.addEventListener("keypress", handleEnterKey);
 }
 
-async function handleRegister(lastNameInput, firstNameInput, emailInput, passwordInput, confirmPasswordInput, signupBtn) {
+async function handleRegister(
+  lastNameInput,
+  firstNameInput,
+  emailInput,
+  passwordInput,
+  confirmPasswordInput,
+  signupBtn,
+) {
   const lastName = lastNameInput.value.trim();
   const firstName = firstNameInput.value.trim();
   const email = emailInput.value.trim();
@@ -129,9 +157,12 @@ function attachPasswordToggleEvents() {
     toggleBtn.addEventListener("click", () => {
       const isPassword = passwordInput.type === "password";
       passwordInput.type = isPassword ? "text" : "password";
-      eyeIcon.src = isPassword ? eyeClosed : eyeOpen;
+      eyeIcon.src = isPassword ? eyeOpen : eyeClosed;
       eyeIcon.alt = isPassword ? "Hide password" : "Show password";
-      toggleBtn.setAttribute("aria-label", isPassword ? "Hide password" : "Show password");
+      toggleBtn.setAttribute(
+        "aria-label",
+        isPassword ? "Hide password" : "Show password",
+      );
     });
   }
 
@@ -143,9 +174,12 @@ function attachPasswordToggleEvents() {
     toggleConfirmBtn.addEventListener("click", () => {
       const isPassword = confirmPasswordInput.type === "password";
       confirmPasswordInput.type = isPassword ? "text" : "password";
-      confirmEyeIcon.src = isPassword ? eyeClosed : eyeOpen;
+      confirmEyeIcon.src = isPassword ? eyeOpen : eyeClosed;
       confirmEyeIcon.alt = isPassword ? "Hide password" : "Show password";
-      toggleConfirmBtn.setAttribute("aria-label", isPassword ? "Hide password" : "Show password");
+      toggleConfirmBtn.setAttribute(
+        "aria-label",
+        isPassword ? "Hide password" : "Show password",
+      );
     });
   }
 }
@@ -158,5 +192,16 @@ function attachLoginLinkEvent() {
   loginLink.addEventListener("click", (event) => {
     event.preventDefault();
     window.app.pushRoute("/login");
+  });
+}
+
+function attachBackHomeEvent() {
+  const backHome = document.getElementById("back-home");
+
+  if (!backHome) return;
+
+  backHome.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.app.pushRoute("/");
   });
 }

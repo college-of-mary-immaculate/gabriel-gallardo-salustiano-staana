@@ -21,19 +21,21 @@
   justify-content: space-between;
 }
 
-/* Logo */
+/* ── Logo ─────────────────────────────────────────────────── */
 .logo-link {
   text-decoration: none;
   color: #333;
+  flex-shrink: 0;
 }
 
 .logo-text {
   font-size: 24px;
   font-weight: 700;
   color: #000000;
+  margin: 0;
 }
 
-/* Navigation */
+/* ── Navigation ───────────────────────────────────────────── */
 .header-nav {
   flex: 1;
   margin: 0 48px;
@@ -44,10 +46,11 @@
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 32px;
 }
 
+/* Desktop link */
 .nav-link {
   text-decoration: none;
   color: #4b5563;
@@ -76,11 +79,24 @@
   width: 100%;
 }
 
-/* Actions */
+/* Hide icon span on desktop */
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: none;
+}
+
+.nav-label {
+  display: inline;
+}
+
+/* ── Actions ──────────────────────────────────────────────── */
 .header-actions {
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-shrink: 0;
 }
 
 .btn-profile {
@@ -101,6 +117,7 @@
 
 .profile-icon {
   font-size: 20px;
+  text-decoration: none;
 }
 
 .btn-logout {
@@ -119,22 +136,56 @@
   background-color: #1d4ed8;
 }
 
-/* Hide padding on login page */
-body.login-page {
-  padding-top: 0;
-}
-
-/* Responsive */
+/* ── Mobile ───────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .header-nav {
-    display: none;
-  }
-
   .header-container {
     padding: 0 16px;
   }
 
+  .header-nav {
+    flex: none;
+    margin: 0;
+  }
+
   .nav-list {
-    gap: 16px;
+    gap: 4px;
+    justify-content: center;
+  }
+
+  /* Icon + tiny label pill */
+  .nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 5px 12px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #4b5563;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  .nav-link:hover {
+    background-color: #f3f4f6;
+    color: #2563eb;
+  }
+
+  .nav-icon {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    display: block;
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .nav-label {
+    display: none;
   }
 }

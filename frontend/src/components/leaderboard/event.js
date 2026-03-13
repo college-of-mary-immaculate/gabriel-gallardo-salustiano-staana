@@ -86,7 +86,9 @@ export default async function Events() {
 
   function handleElectionError(error) {
     console.error("Election error:", error);
-    updateEmptyState(`Error: ${error.message || "Failed to load election data"}`);
+    updateEmptyState(
+      `Error: ${error.message || "Failed to load election data"}`,
+    );
   }
 
   function handleDisconnect() {
@@ -114,18 +116,25 @@ export default async function Events() {
       const positionElement = document.getElementById(`position-${positionId}`);
 
       if (positionElement) {
-        const candidateList = positionElement.querySelector('[class*="candidate-list"]');
+        const candidateList = positionElement.querySelector(
+          '[class*="candidate-list"]',
+        );
         const scrollTop = candidateList ? candidateList.scrollTop : 0;
 
         positionElement.outerHTML = buildLeaderboardPositionHtml(positionData);
 
         if (scrollTop) {
           const newElement = document.getElementById(`position-${positionId}`);
-          const newList = newElement?.querySelector('[class*="candidate-list"]');
+          const newList = newElement?.querySelector(
+            '[class*="candidate-list"]',
+          );
           if (newList) newList.scrollTop = scrollTop;
         }
       } else {
-        container.insertAdjacentHTML("beforeend", buildLeaderboardPositionHtml(positionData));
+        container.insertAdjacentHTML(
+          "beforeend",
+          buildLeaderboardPositionHtml(positionData),
+        );
       }
     });
   }
@@ -152,7 +161,10 @@ function buildLeaderboardPositionHtml(positionData) {
     .map((candidate, index) => buildCircleHtml(candidate, index))
     .join("");
 
-  const totalVotes = positionData.candidates.reduce((sum, c) => sum + c.votes, 0);
+  const totalVotes = positionData.candidates.reduce(
+    (sum, c) => sum + c.votes,
+    0,
+  );
   const voteTallyHtml = buildVoteTallyHtml({
     title: "Leaderboard",
     totalVotes,
@@ -203,7 +215,14 @@ function buildVoteTallyHtml({ title, totalVotes, candidates }) {
   `;
 }
 
-function buildCandidateItemHtml({ rank, image, name, votes, percentage, color }) {
+function buildCandidateItemHtml({
+  rank,
+  image,
+  name,
+  votes,
+  percentage,
+  color,
+}) {
   return `
     <div class="${styles["candidate-item"]}">
       <span class="${styles["rank-number"]}">${rank}</span>
