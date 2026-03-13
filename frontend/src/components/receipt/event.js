@@ -1,69 +1,64 @@
 import { ping } from "../../utils/home.js";
 import { isTokenExpired } from "../../utils/authentication.js";
+import { getSocket } from "../../utils/socket.js";
 import styles from "./component.module.css";
 
 export default async function Events() {
-  let socket = null;
   console.log("Receipt Page Event");
 
-  window.addEventListener("load", async function () {
-    try {
-      await ping();
-      document.getElementById("under-maintenance").style.display = "none";
-      document.getElementById("app").style.display = "block";
-    } catch {
-      document.getElementById("under-maintenance").style.display = "block";
-      document.getElementById("app").style.display = "none";
-      return;
-    }
+  try {
+    await ping();
+    document.getElementById("under-maintenance").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  } catch {
+    document.getElementById("under-maintenance").style.display = "block";
+    document.getElementById("app").style.display = "none";
+    return;
+  }
 
-    const token = localStorage.getItem("token");
-    if (!token) {
-      window.app.pushRoute("/login");
-      return;
-    }
+  const token = localStorage.getItem("token");
+  if (!token) {
+    window.app.pushRoute("/login");
+    return;
+  }
 
-    if (isTokenExpired(token)) {
-      localStorage.removeItem("token");
-      window.app.pushRoute("/login");
-      return;
-    }
+  if (isTokenExpired(token)) {
+    localStorage.removeItem("token");
+    window.app.pushRoute("/login");
+    return;
+  }
 
-    const savedReceipt = sessionStorage.getItem("voteReceipt");
+  const savedReceipt = sessionStorage.getItem("voteReceipt");
 
-    if (!savedReceipt) {
-      window.app.pushRoute("/leaderboards");
-      return;
-    }
+  if (!savedReceipt) {
+    window.app.pushRoute("/leaderboards");
+    return;
+  }
 
-    let receiptData;
-    try {
-      receiptData = JSON.parse(savedReceipt);
-    } catch {
-      window.app.pushRoute("/leaderboards");
-      return;
-    }
+  let receiptData;
+  try {
+    receiptData = JSON.parse(savedReceipt);
+  } catch {
+    window.app.pushRoute("/leaderboards");
+    return;
+  }
 
-    const contentEl = document.getElementById("receipt-content");
-    if (contentEl) {
-      contentEl.innerHTML = buildReceiptHtml(receiptData);
-    }
+  const contentEl = document.getElementById("receipt-content");
+  if (contentEl) {
+    contentEl.innerHTML = buildReceiptHtml(receiptData);
+  }
 
-    sessionStorage.removeItem("voteSelections");
-    sessionStorage.removeItem("voteCandidatesData");
-    sessionStorage.removeItem("votetallyData");
-    sessionStorage.removeItem("voteElectionId");
+  sessionStorage.removeItem("voteSelections");
+  sessionStorage.removeItem("voteCandidatesData");
+  sessionStorage.removeItem("votetallyData");
+  sessionStorage.removeItem("voteElectionId");
 
-    if (!socket) {
-      socket = io();
-      socket.emit("setEmail", token);
-    }
+  const socket = getSocket();
+  socket.emit("setEmail", token);
 
-    socket.on("electionEnded", () => {
-      alert("The election has ended.");
-      if (socket) socket.disconnect();
-      window.app.pushRoute("/leaderboards");
-    });
+  socket.on("electionEnded", () => {
+    alert("The election has ended.");
+    window.app.pushRoute("/leaderboards");
   });
 }
 

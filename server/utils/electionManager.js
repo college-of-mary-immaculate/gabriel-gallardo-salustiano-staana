@@ -27,8 +27,8 @@ export async function getOrCreateElection() {
     }
 
     const now = new Date();
-    // const endTime = new Date(now.getTime() + 60 * 1000);
-    const endTime = new Date(now.getTime() + 60 * 60 * 1000);
+    const endTime = new Date(now.getTime() + 60 * 1000);
+    // const endTime = new Date(now.getTime() + 60 * 60 * 1000);
 
     const newElectionName = `Election – ${formatDateForMySQL(now, { withSeconds: false })}`;
     const startTimeFormatted = formatDateForMySQL(now);

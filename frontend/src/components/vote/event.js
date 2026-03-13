@@ -1,5 +1,6 @@
 import { ping } from "../../utils/home.js";
 import { isTokenExpired } from "../../utils/authentication.js";
+import { getSocket } from "../../utils/socket.js";
 import { jwtDecode } from "jwt-decode";
 import styles from "./component.module.css";
 
@@ -7,7 +8,6 @@ const DEFAULT_AVATAR = "https://res.cloudinary.com/hamsters-api/image/upload/v17
 const POSITION_ORDER = ["President", "Vice President", "Senator", "Party-List"];
 
 export default async function Events() {
-  let socket = null;
   let electionId = null;
   let userEmail = null;
   let currentPosition = null;
@@ -16,55 +16,51 @@ export default async function Events() {
   let tallyByPosition = {};
   let selections = {};
 
-  window.addEventListener("load", async function () {
-    console.log("Vote Page Event");
+  console.log("Vote Page Event");
 
+  try {
+    await ping();
+    document.getElementById("under-maintenance").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  } catch {
+    document.getElementById("under-maintenance").style.display = "block";
+    document.getElementById("app").style.display = "none";
+    return;
+  }
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    window.app.pushRoute("/login");
+    return;
+  }
+
+  if (isTokenExpired(token)) {
+    localStorage.removeItem("token");
+    window.app.pushRoute("/login");
+    return;
+  }
+
+  // Decode email from token
+  const decoded = jwtDecode(token);
+  userEmail = decoded.email;
+
+  const savedSelections = sessionStorage.getItem("voteSelections");
+  if (savedSelections) {
     try {
-      await ping();
-      document.getElementById("under-maintenance").style.display = "none";
-      document.getElementById("app").style.display = "block";
+      selections = JSON.parse(savedSelections);
     } catch {
-      document.getElementById("under-maintenance").style.display = "block";
-      document.getElementById("app").style.display = "none";
-      return;
+      selections = {};
     }
+  }
 
-    const token = localStorage.getItem("token");
-    if (!token) {
-      window.app.pushRoute("/login");
-      return;
-    }
+  const socket = getSocket();
+  socket.emit("setEmail", token);
 
-    if (isTokenExpired(token)) {
-      localStorage.removeItem("token");
-      window.app.pushRoute("/login");
-      return;
-    }
+  setupSocketListeners(socket);
 
-    // Decode email from token
-    const decoded = jwtDecode(token);
-    userEmail = decoded.email;
+  socket.emit("requestElectionData");
 
-    const savedSelections = sessionStorage.getItem("voteSelections");
-    if (savedSelections) {
-      try {
-        selections = JSON.parse(savedSelections);
-      } catch {
-        selections = {};
-      }
-    }
-
-    if (!socket) {
-      socket = io();
-      socket.emit("setEmail", token);
-    }
-
-    setupSocketListeners(socket);
-
-    socket.emit("requestElectionData");
-
-    attachFooterEvents();
-  });
+  attachFooterEvents();
 
   function setupSocketListeners(socket) {
     socket.on("electionData", handleElectionData);
@@ -94,7 +90,6 @@ export default async function Events() {
 
   function handleVoteStatusResult({ voted }) {
     if (voted) {
-      if (socket) socket.disconnect();
       window.app.pushRoute("/leaderboards");
     }
   }
@@ -148,7 +143,6 @@ export default async function Events() {
 
   function handleElectionEnded() {
     alert("The election has ended.");
-    if (socket) socket.disconnect();
     window.app.pushRoute("/leaderboards");
   }
 
@@ -270,7 +264,6 @@ export default async function Events() {
     if (cancelButton) {
       cancelButton.addEventListener("click", () => {
         if (confirm("Are you sure you want to cancel your vote?")) {
-          if (socket) socket.disconnect();
           window.app.pushRoute("/leaderboards");
         }
       });

@@ -1,3 +1,5 @@
+import { cleanupSocketListeners } from "../utils/socket.js";
+
 class SPA {
   routes = [];
 
@@ -37,6 +39,7 @@ class SPA {
   }
 
   execute(path) {
+    cleanupSocketListeners();
     const route = this.get(path);
     let params;
 
@@ -68,12 +71,13 @@ class SPA {
 
   handleClick(e) {
     try {
-      const targetUrl = new URL(e.target.href);
-      const target = e.target.getAttribute("target") || "_self";
+      const anchor = e.currentTarget;
+      const targetUrl = new URL(anchor.href);
+      const target = anchor.getAttribute("target") || "_self";
 
       if (targetUrl.origin === window.location.origin && target === "_self") {
         e.preventDefault();
-        history.pushState({}, "", e.target.href);
+        history.pushState({}, "", anchor.href);
         this.execute(window.location.pathname);
 
         // simulate scroll into

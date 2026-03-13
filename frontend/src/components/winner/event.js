@@ -1,62 +1,48 @@
 import { ping } from "../../utils/home";
 import { isTokenExpired } from "../../utils/authentication";
+import { getSocket } from "../../utils/socket.js";
 import styles from "./component.module.css";
 
 export default async function Events() {
-  let socket = null;
+  try {
+    await ping();
+    document.getElementById("under-maintenance").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  } catch {
+    document.getElementById("under-maintenance").style.display = "block";
+    document.getElementById("app").style.display = "none";
+    return;
+  }
 
-  window.addEventListener("load", async function () {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    window.app.pushRoute("/login");
+    return;
+  }
+
+  if (isTokenExpired(token)) {
+    localStorage.removeItem("token");
+    window.app.pushRoute("/login");
+    return;
+  }
+
+  const stored = sessionStorage.getItem("winners");
+  if (stored) {
     try {
-      await ping();
-      document.getElementById("under-maintenance").style.display = "none";
-      document.getElementById("app").style.display = "block";
-    } catch {
-      document.getElementById("under-maintenance").style.display = "block";
-      document.getElementById("app").style.display = "none";
-      return;
-    }
+      renderWinners(JSON.parse(stored));
+    } catch {}
+  }
 
-    const token = localStorage.getItem("token");
-    if (!token) {
-      window.app.pushRoute("/login");
-      return;
-    }
+  const socket = getSocket();
+  socket.emit("setEmail", token);
 
-    if (isTokenExpired(token)) {
-      localStorage.removeItem("token");
-      window.app.pushRoute("/login");
-      return;
-    }
+  setupSocketListeners(socket);
 
-    const stored = sessionStorage.getItem("winners");
-    if (stored) {
-      try {
-        renderWinners(JSON.parse(stored));
-      } catch {}
-    }
-
-    if (!socket) {
-      socket = io();
-      socket.emit("setEmail", token);
-    }
-
-    setupSocketListeners(socket);
-
-    const electionData = sessionStorage.getItem("currentElection");
-    if (electionData) {
-      try {
-        const { electionId } = JSON.parse(electionData);
-        socket.emit("requestElectionWinners", { electionId });
-      } catch {}
-    } else {
-      socket.emit("requestElectionData");
-    }
-  });
+  socket.emit("requestLastElectionWinners");
 
   function setupSocketListeners(socket) {
     socket.on("electionWinners", handleElectionWinners);
     socket.on("winnersUpdate", handleWinnersUpdate);
-    socket.on("electionData", handleElectionData);
     socket.on("winnersError", handleWinnersError);
     socket.on("disconnect", handleDisconnect);
   }
@@ -72,15 +58,6 @@ export default async function Events() {
     if (data?.winners) {
       sessionStorage.setItem("winners", JSON.stringify(data.winners));
       renderWinners(data.winners);
-    }
-  }
-
-  function handleElectionData(electionData) {
-    if (electionData?.electionId) {
-      sessionStorage.setItem("currentElection", JSON.stringify(electionData));
-      socket.emit("requestElectionWinners", { electionId: electionData.electionId });
-    } else {
-      updateEmptyState("No active election");
     }
   }
 

@@ -1,5 +1,6 @@
 import { ping } from "../../utils/home.js";
 import { isTokenExpired } from "../../utils/authentication.js";
+import { getSocket } from "../../utils/socket.js";
 import { castVote } from "../../utils/vote.js";
 import { jwtDecode } from "jwt-decode";
 import styles from "./component.module.css";
@@ -7,83 +8,77 @@ import styles from "./component.module.css";
 const POSITION_ORDER = ["President", "Vice President", "Senator", "Party-List"];
 
 export default async function Events() {
-  let socket = null;
   let electionId = null;
   let userEmail = null;
   let selections = {};
   let displayData = [];
 
-  window.addEventListener("load", async function () {
-    try {
-      await ping();
-      document.getElementById("under-maintenance").style.display = "none";
-      document.getElementById("app").style.display = "block";
-    } catch {
-      document.getElementById("under-maintenance").style.display = "block";
-      document.getElementById("app").style.display = "none";
-      return;
-    }
+  try {
+    await ping();
+    document.getElementById("under-maintenance").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  } catch {
+    document.getElementById("under-maintenance").style.display = "block";
+    document.getElementById("app").style.display = "none";
+    return;
+  }
 
-    const token = localStorage.getItem("token");
-    if (!token) {
-      window.app.pushRoute("/login");
-      return;
-    }
+  const token = localStorage.getItem("token");
+  if (!token) {
+    window.app.pushRoute("/login");
+    return;
+  }
 
-    if (isTokenExpired(token)) {
-      localStorage.removeItem("token");
-      window.app.pushRoute("/login");
-      return;
-    }
+  if (isTokenExpired(token)) {
+    localStorage.removeItem("token");
+    window.app.pushRoute("/login");
+    return;
+  }
 
-    const decoded = jwtDecode(token);
-    userEmail = decoded.email;
+  const decoded = jwtDecode(token);
+  userEmail = decoded.email;
 
-    const savedSelections = sessionStorage.getItem("voteSelections");
-    const savedCandidates = sessionStorage.getItem("voteCandidatesData");
-    const savedTally = sessionStorage.getItem("votetallyData");
-    electionId = sessionStorage.getItem("voteElectionId");
+  const savedSelections = sessionStorage.getItem("voteSelections");
+  const savedCandidates = sessionStorage.getItem("voteCandidatesData");
+  const savedTally = sessionStorage.getItem("votetallyData");
+  electionId = sessionStorage.getItem("voteElectionId");
 
-    if (!savedSelections || !electionId) {
-      window.app.pushRoute("/vote");
-      return;
-    }
+  if (!savedSelections || !electionId) {
+    window.app.pushRoute("/vote");
+    return;
+  }
 
-    try {
-      selections = JSON.parse(savedSelections);
-    } catch {
-      window.app.pushRoute("/vote");
-      return;
-    }
+  try {
+    selections = JSON.parse(savedSelections);
+  } catch {
+    window.app.pushRoute("/vote");
+    return;
+  }
 
-    const candidatesByPosition = savedCandidates ? JSON.parse(savedCandidates) : {};
-    const tallyByPosition = savedTally ? JSON.parse(savedTally) : {};
+  const candidatesByPosition = savedCandidates ? JSON.parse(savedCandidates) : {};
+  const tallyByPosition = savedTally ? JSON.parse(savedTally) : {};
 
-    displayData = buildDisplayData(selections, candidatesByPosition, tallyByPosition);
+  displayData = buildDisplayData(selections, candidatesByPosition, tallyByPosition);
 
-    if (displayData.length === 0) {
-      window.app.pushRoute("/vote");
-      return;
-    }
+  if (displayData.length === 0) {
+    window.app.pushRoute("/vote");
+    return;
+  }
 
-    const contentEl = document.getElementById("confirmation-content");
-    if (contentEl) {
-      contentEl.innerHTML = buildConfirmationHtml(displayData);
-    }
+  const contentEl = document.getElementById("confirmation-content");
+  if (contentEl) {
+    contentEl.innerHTML = buildConfirmationHtml(displayData);
+  }
 
-    if (!socket) {
-      socket = io();
-      socket.emit("setEmail", token);
-    }
+  const socket = getSocket();
+  socket.emit("setEmail", token);
 
-    socket.on("electionEnded", () => {
-      alert("The election has ended.");
-      if (socket) socket.disconnect();
-      window.app.pushRoute("/leaderboards");
-    });
-
-    attachButtonEvents();
+  socket.on("electionEnded", () => {
+    alert("The election has ended.");
+    window.app.pushRoute("/leaderboards");
   });
+
+  attachButtonEvents();
 
   function buildDisplayData(selections, candidatesByPosition, tallyByPosition) {
     const result = [];

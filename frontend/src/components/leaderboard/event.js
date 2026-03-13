@@ -1,42 +1,37 @@
 import { ping } from "../../utils/home";
 import { isTokenExpired } from "../../utils/authentication";
+import { getSocket } from "../../utils/socket.js";
 import styles from "./component.module.css";
 
 export default async function Events() {
-  let socket = null;
+  try {
+    await ping();
+    document.getElementById("under-maintenance").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  } catch {
+    document.getElementById("under-maintenance").style.display = "block";
+    document.getElementById("app").style.display = "none";
+    return;
+  }
 
-  window.addEventListener("load", async function () {
-    try {
-      await ping();
-      document.getElementById("under-maintenance").style.display = "none";
-      document.getElementById("app").style.display = "block";
-    } catch {
-      document.getElementById("under-maintenance").style.display = "block";
-      document.getElementById("app").style.display = "none";
-      return;
-    }
+  const token = localStorage.getItem("token");
+  if (!token) {
+    window.app.pushRoute("/login");
+    return;
+  }
 
-    const token = localStorage.getItem("token");
-    if (!token) {
-      window.app.pushRoute("/login");
-      return;
-    }
+  if (isTokenExpired(token)) {
+    localStorage.removeItem("token");
+    window.app.pushRoute("/login");
+    return;
+  }
 
-    if (isTokenExpired(token)) {
-      localStorage.removeItem("token");
-      window.app.pushRoute("/login");
-      return;
-    }
+  const socket = getSocket();
+  socket.emit("setEmail", token);
 
-    if (!socket) {
-      socket = io();
-      socket.emit("setEmail", token);
-    }
+  setupSocketListeners(socket);
 
-    setupSocketListeners(socket);
-
-    socket.emit("requestElectionData");
-  });
+  socket.emit("requestElectionData");
 
   function setupSocketListeners(socket) {
     socket.on("electionData", handleElectionData);

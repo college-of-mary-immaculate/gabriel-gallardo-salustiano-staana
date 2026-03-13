@@ -113,6 +113,24 @@ try {
       }
     });
 
+    socket.on("requestLastElectionWinners", async () => {
+      try {
+        const history = await getElectionHistory();
+        if (!history || history.length === 0) {
+          socket.emit("electionWinners", { winners: [] });
+          return;
+        }
+        const lastElection = history[0];
+        const candidates = await getCandidatesByElection(lastElection.electionId);
+        const voteCounts = await getVoteCounts(lastElection.electionId);
+        const winners = computeWinners(voteCounts, candidates);
+        socket.emit("electionWinners", { electionId: lastElection.electionId, winners });
+      } catch (error) {
+        console.error("Error fetching last election winners:", error);
+        socket.emit("winnersError", { message: "Failed to load last election winners" });
+      }
+    });
+
     socket.on("checkVoteStatus", async ({ electionId, userEmail }) => {
       try {
         const voted = await hasVotedInElection(electionId, userEmail);
