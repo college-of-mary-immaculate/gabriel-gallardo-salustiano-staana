@@ -1,10 +1,10 @@
 #!/bin/bash
 
 docker compose down
-rm -rf ./master/data/* ./master/data/.gitkeep
-rm -rf ./slave/data/* ./slave/data/.gitkeep
-chmod 044 ./master/conf/mysql.conf.cnf
-chmod 044 ./slave/conf/mysql.conf.cnf
+sudo rm -rf ./master/data/* ./master/data/.gitkeep
+sudo rm -rf ./slave/data/* ./slave/data/.gitkeep
+chmod 444 ./master/conf/mysql.conf.cnf
+chmod 444 ./slave/conf/mysql.conf.cnf
 docker compose build
 docker compose up -d mysql_master mysql_slave
 

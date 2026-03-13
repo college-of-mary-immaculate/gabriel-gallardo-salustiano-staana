@@ -136,6 +136,34 @@ sudo usermod -aG docker $USER
    | HAProxy Stats | http://localhost:8404        |
    | Backend API   | http://localhost:5000/api/v1 |
 
+## Testing MySQL Master-Slave Replication
+
+Once the application is running, you can verify that master-slave replication is working correctly.
+
+**Test write on master (should succeed):**
+
+```bash
+docker exec mysql_master sh -c "export MYSQL_PWD=111; mysql -u root mydb -e 'CREATE TABLE IF NOT EXISTS test_write (id INT); INSERT INTO test_write VALUES (1); SELECT * FROM test_write;'"
+```
+
+**Test read on slave (should show replicated data):**
+
+```bash
+docker exec mysql_slave sh -c "export MYSQL_PWD=mydb_slave_pwd; mysql -u mydb_slave_user mydb -e 'SELECT * FROM test_write;'"
+```
+
+**Test write on slave (should fail with INSERT command denied):**
+
+```bash
+docker exec mysql_slave sh -c "export MYSQL_PWD=mydb_slave_pwd; mysql -u mydb_slave_user mydb -e 'INSERT INTO test_write VALUES (2);'"
+```
+
+**Cleanup test table:**
+
+```bash
+docker exec mysql_master sh -c "export MYSQL_PWD=111; mysql -u root mydb -e 'DROP TABLE test_write;'"
+```
+
 ## Stopping the Application
 
 ```bash
