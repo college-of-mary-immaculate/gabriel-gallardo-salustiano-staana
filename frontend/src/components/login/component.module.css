@@ -106,6 +106,39 @@ body {
   margin: 0;
 }
 
+.login-mode-toggle {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.25rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 0.55rem 1rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: #94a3b8;
+  transition: background 0.2s, color 0.2s;
+}
+
+.mode-btn[data-active="true"] {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+}
+
+.mode-btn:hover:not([data-active="true"]) {
+  background: #e2e8f0;
+  color: #475569;
+}
+
 .user-input {
   width: 100%;
   display: flex;
