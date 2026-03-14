@@ -4,7 +4,7 @@ import eyeOpen from "../../assets/icons/eye-open.svg";
 export default function Main(root) {
   root.innerHTML = `
    <div> 
-    <a id="back-home" href="#" class="${styles["back-home"]}">
+    <a id="back-home" href="/" class="${styles["back-home"]}">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M19 12H5M12 5l-7 7 7 7"/>
         </svg>
@@ -25,9 +25,14 @@ export default function Main(root) {
           <h3 class="${styles["label-voting-h3"]}">Please login using the form below</h3>
         </div>
 
+        <div class="${styles["login-mode-toggle"]}">
+          <button type="button" id="mode-email" class="${styles["mode-btn"]}" data-active="true">Email</button>
+          <button type="button" id="mode-vin" class="${styles["mode-btn"]}" data-active="false">VIN</button>
+        </div>
+
         <div class="${styles["user-input"]}">
           <div class="${styles["id-input"]}">
-            <p class="${styles["email-input-p"]}">Email</p>
+            <p id="identifier-label" class="${styles["email-input-p"]}">Email</p>
             <input
               type="email"
               id="identifier"

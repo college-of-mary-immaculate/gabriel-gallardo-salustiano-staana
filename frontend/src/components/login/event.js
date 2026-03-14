@@ -27,10 +27,47 @@ export default async function Events() {
     }
   }
 
+  loginMode = "email";
+  attachLoginModeToggle();
   attachLoginFormEvents();
   attachPasswordToggleEvents();
   attachSignupLinkEvent();
   attachBackHomeEvent();
+}
+
+let loginMode = "email";
+
+function attachLoginModeToggle() {
+  const emailBtn = document.getElementById("mode-email");
+  const vinBtn = document.getElementById("mode-vin");
+  const identifierInput = document.getElementById("identifier");
+  const identifierLabel = document.getElementById("identifier-label");
+
+  if (!emailBtn || !vinBtn || !identifierInput || !identifierLabel) return;
+
+  function setMode(mode) {
+    loginMode = mode;
+    identifierInput.value = "";
+
+    if (mode === "email") {
+      identifierInput.type = "email";
+      identifierInput.placeholder = "you@example.com";
+      identifierInput.autocomplete = "email";
+      identifierLabel.textContent = "Email";
+      emailBtn.dataset.active = "true";
+      vinBtn.dataset.active = "false";
+    } else {
+      identifierInput.type = "text";
+      identifierInput.placeholder = "Enter your VIN";
+      identifierInput.autocomplete = "off";
+      identifierLabel.textContent = "VIN";
+      emailBtn.dataset.active = "false";
+      vinBtn.dataset.active = "true";
+    }
+  }
+
+  emailBtn.addEventListener("click", () => setMode("email"));
+  vinBtn.addEventListener("click", () => setMode("vin"));
 }
 
 function attachLoginFormEvents() {
@@ -64,8 +101,22 @@ async function handleLogin(identifierInput, passwordInput, loginBtn) {
   const password = passwordInput.value.trim();
 
   if (!identifier || !password) {
-    alert("Please enter both email/vin and password");
+    alert("Please enter both email/VIN and password");
     return;
+  }
+
+  if (loginMode === "email") {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(identifier)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+  } else {
+    const vinRegex = /^VIN-[0-9A-F]{8}$/;
+    if (!vinRegex.test(identifier)) {
+      alert("Please enter a valid VIN (e.g. VIN-A1B2C3D4)");
+      return;
+    }
   }
 
   loginBtn.disabled = true;

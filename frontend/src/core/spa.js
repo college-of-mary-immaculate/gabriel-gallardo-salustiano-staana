@@ -40,6 +40,7 @@ class SPA {
 
   execute(path) {
     cleanupSocketListeners();
+    document.body.className = "";
     const route = this.get(path);
     let params;
 

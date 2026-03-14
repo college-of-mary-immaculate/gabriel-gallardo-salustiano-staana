@@ -30,6 +30,7 @@ export default async function Events() {
   attachRegisterFormEvents();
   attachPasswordToggleEvents();
   attachLoginLinkEvent();
+  attachBackHomeEvent();
 }
 
 function attachRegisterFormEvents() {
@@ -101,6 +102,12 @@ async function handleRegister(
 
   if (!lastName || !firstName || !email || !password || !confirmPassword) {
     alert("Please fill in all fields");
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert("Please enter a valid email address");
     return;
   }
 
